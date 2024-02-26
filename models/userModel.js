@@ -6,6 +6,8 @@ var userSchema = mongoose.Schema({
     EmailId: {type:String,required:true},
     Password: {type:String,required:true},
     status: {type:String,default:"Active"},
+    EventCount: {type:Number,default:0},
+    dob: {type:Date},
     address: {type:String}
 });
 

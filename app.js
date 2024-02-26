@@ -3,9 +3,17 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const useragent = require("express-useragent");
-const port = 5500;
 
 var user = require('./routes/userRoute');
+
+mongoose.connect(process.env.MONGOURL || 'mongodb+srv://kevinstephenbiju2025:<password>@ksbmcluster01.rfmkko1.mongodb.net/',
+{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+    console.log('Connected to Database');
+}).catch((er)=>{
+    console.log(er);
+});
+
+var port = process.env.PORT || 5500;
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
