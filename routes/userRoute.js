@@ -1,7 +1,7 @@
 const express = require("express");
 var router = express.Router();
 
-var userModel = require('../models/userModel');
+var userModel = require('../models/usersModel');
 
 // router.get('/reg',async(req,res)=>{
 //     try{

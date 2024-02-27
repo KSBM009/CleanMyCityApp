@@ -1,10 +1,10 @@
 const express = require('express');
-const app = express();
-const mongoose = require("mongoose");
-const cors = require("cors");
-const useragent = require("express-useragent");
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
-var user = require('./routes/userRoute');
+const app = express();
+const PORT = 3000;
 
 mongoose.connect(process.env.MONGOURL || 'mongodb+srv://kevinstephenbiju2025:YgPEgzKU86t@ksbmcluster01.rfmkko1.mongodb.net/?retryWrites=true&w=majority&appName=KsbmCluster01',
 {useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
@@ -13,12 +13,59 @@ mongoose.connect(process.env.MONGOURL || 'mongodb+srv://kevinstephenbiju2025:YgP
     console.log(er);
 });
 
-var port = process.env.PORT || 5500;
-
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+// User Schema
+const userSchema = new mongoose.Schema({
+  emailId: { type: String, unique: true, required: true },
+  password: { type: String, required: true }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const User = mongoose.model('User', userSchema);
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Signup Route
+app.post('/signup', async (req, res) => {
+  const { emailId, password } = req.body;
+
+  try {
+    // Hash the password before saving it to the database
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({ emailId, password: hashedPassword });
+    await newUser.save();
+
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Login Route
+app.post('/login', async (req, res) => {
+  const { emailId, password } = req.body;
+
+  try {
+    const user = await User.findOne({ emailId });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    res.status(200).json({ message: 'Login successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
