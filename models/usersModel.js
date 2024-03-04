@@ -8,7 +8,8 @@ var usersSchema = mongoose.Schema({
     status: {type:String,default:"Active"},
     EventCount: {type:Number,default:0},
     dob: {type:Date},
-    address: {type:String}
+    address: {type:String},
+    createdAt: {type:BSON,required:true}
 });
 
 module.exports = mongoose.model("usersModel",usersSchema);
