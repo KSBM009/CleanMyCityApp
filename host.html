@@ -22,7 +22,7 @@
 
       #main-form {
         margin: 10px;
-        padding: 10px;
+        padding: 17px;
         border: 1px solid black;
         border-radius: 5px;
         position: relative;
@@ -30,56 +30,102 @@
         left: 450px;
         width: 1000px;
       }
+
+      .form-control {
+        border-radius: 15px;
+      }
+
+      button {
+        border-radius: 20px;
+      }
+
+      #UploadImage-Button {
+        border-radius: 15px;
+        margin: 10px;
+      }
+
+      #Submit-Button {
+        width: 350px;
+        position: relative;
+        left: 55px;
+        border-radius: 15px;
+        margin-top: 10px;
+      }
     </style>
   </head>
   <body>
     <section id="navbar">
       <ul>
-        <li class="nav-item">Host</li>
+        <a href="host.html"><li class="nav-item">Host</li></a>
         <li class="nav-item">Participate</li>
         <li class="nav-item">Profile</li>
       </ul>
     </section>
 
     <section id="main-form">
-      <form action="">
-        <form>
-          <div class="mb-3">
-            <label for="Event-Title" class="form-label">Event Title</label>
-            <input
-              type="text"
-              class="form-control"
-              id="Event-Title"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="Event-Description" class="form-label">Event Description </label>
-            <input type="text" class="form-control" id="Event-Description" />
-          </div>
+      <form>
+        <h1 align="center">Event Registration</h1>
+        <div class="mb-3">
+          <label for="Event-Title" class="form-label">Event Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Event-Title"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="Event-Description" class="form-label"
+            >Event Description
+          </label>
+          <input type="text" class="form-control" id="Event-Description" />
+        </div>
 
-          <div class="mb-3">
-            <label for="Event-Category" class="form-label">Event Category</label>
-            <input type="text" class="form-control" id="Event-Category" />
-          </div>
+        <div class="mb-3">
+          <label for="Event-Category" class="form-label">Event Category</label>
+          <input type="text" class="form-control" id="Event-Category" />
+        </div>
 
-          <div class="mb-3">
-            <label for="Event-Location" class="form-label">Event Location </label>
-            <input type="text" class="form-control" id="Event-Location" />
-          </div>
+        <div class="mb-3">
+          <label for="Event-Location" class="form-label">Event Location </label>
+          <input type="text" class="form-control" id="Event-Location" />
+        </div>
 
-          <div class="mb-3">
-            <label for="EventHost-Date" class="form-label">Event Host Date </label>
-            <input type="date" class="form-control" id="EventHost-Date" />
-          </div>
+        <div class="mb-3">
+          <label for="EventHost-DateTime" class="form-label"
+            >Event Host Date and Time
+          </label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="EventHost-DateTime"
+          />
+        </div>
 
-          <div class="mb-3">
-            <label for="EventHost-D" class="form-label">Event Host Date </label>
-            <input type="date" class="form-control" id="EventHost-Date" />
-          </div>
+        <div class="mb-3">
+          <label for="Volunteers-Required" class="form-label"
+            >Volunteers Required
+          </label>
+          <input
+            type="number"
+            class="form-control"
+            id="Volunteers-Required"
+            min="1"
+          />
+        </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <!-- <button
+            id="UploadImage-Button"
+            class="btn btn-secondary"
+            type="button"
+          >
+            Upload Image
+          </button> -->
+          <button id="Submit-Button" class="btn btn-success" type="button">
+            Submit
+          </button>
+        </div>
       </form>
     </section>
     <script
