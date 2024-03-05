@@ -71,22 +71,23 @@
             type="text"
             class="form-control"
             id="Event-Title"
+            name="title" <!-- Added name attribute -->
             aria-describedby="emailHelp"
           />
         </div>
         <div class="mb-3">
           <label for="Event-Description" class="form-label">Event Description </label>
-          <input type="text" class="form-control" id="Event-Description" />
+          <input type="text" class="form-control" id="Event-Description" name="description" /> <!-- Added name attribute -->
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="Event-Category" class="form-label">Event Category </label>
           <input type="text" class="form-control" id="Event-Category" />
-        </div>
+        </div> -->
 
         <div class="mb-3">
           <label for="Event-Location" class="form-label">Event Location </label>
-          <input type="text" class="form-control" id="Event-Location" />
+          <input type="text" class="form-control" id="Event-Location" name="location" />
         </div>
 
         <div class="mb-3">
@@ -95,6 +96,7 @@
             type="datetime-local"
             class="form-control"
             id="EventHost-DateTime"
+            name="hostDateTime" <!-- Added name attribute -->
           />
         </div>
 
@@ -105,6 +107,7 @@
             class="form-control"
             id="Volunteers-Required"
             min="1"
+            name="volunteersRequired" <!-- Added name attribute -->
           />
         </div>
 
