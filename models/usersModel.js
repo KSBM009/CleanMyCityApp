@@ -9,7 +9,8 @@ var usersSchema = mongoose.Schema({
     EventCount: {type:Number,default:0},
     dob: {type:Date},
     address: {type:String},
-    createdAt: {type:BSON,required:true}
+    createdAt: {type:BSON,required:true},
+    lastLogin: {type:BSON,required:true}
 });
 
 module.exports = mongoose.model("usersModel",usersSchema);
