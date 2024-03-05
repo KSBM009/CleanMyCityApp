@@ -3,7 +3,7 @@ var usersSchema = mongoose.Schema({
     userId: {type:String},
     Name: {type:String},
     Gender: {type:String},
-    EmailId: {type:String,required:true},
+    EmailId: {type:String,required:true,Unique},
     Password: {type:String,required:true},
     status: {type:String,default:"Active"},
     EventCount: {type:Number,default:0},
