@@ -51,6 +51,38 @@
         border-radius: 15px;
         margin-top: 10px;
       }
+
+      @media screen and (min-width: 651px) and (max-width: 1023px) {
+        #main-form {
+          width: 100%;
+          left: 0px;
+        }
+
+        #Submit-Button {
+          width: 200px;
+        }
+      }
+
+      @media screen and (max-width: 650px) {
+        #main-form {
+          width: 98%;
+          left: 0px;
+        }
+
+        #Submit-Button {
+          width: 200px;
+        }
+
+        h1 {
+          font-size: 19px;
+          display: flex;
+          position: relative;
+          left: 150px;
+          
+      
+          
+        }
+      }
     </style>
   </head>
   <body>
@@ -64,20 +96,36 @@
 
     <section id="main-form">
       <form action="/submitEvent" method="POST">
-        <h1 align="center">Event Registration</h1>
+       
+            <h1 align="center">Event Registration</h1>
+         
+        </div>
         <div class="mb-3">
           <label for="Event-Title" class="form-label">Event Title </label>
           <input
             type="text"
             class="form-control"
             id="Event-Title"
-            name="title" <!-- Added name attribute -->
-            aria-describedby="emailHelp"
+            name="title"
+            <!--
+            Added
+            name
+            attribute
+            --
           />
+          aria-describedby="emailHelp" />
         </div>
         <div class="mb-3">
-          <label for="Event-Description" class="form-label">Event Description </label>
-          <input type="text" class="form-control" id="Event-Description" name="description" /> <!-- Added name attribute -->
+          <label for="Event-Description" class="form-label"
+            >Event Description
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="Event-Description"
+            name="description"
+          />
+          <!-- Added name attribute -->
         </div>
 
         <!-- <div class="mb-3">
@@ -87,27 +135,48 @@
 
         <div class="mb-3">
           <label for="Event-Location" class="form-label">Event Location </label>
-          <input type="text" class="form-control" id="Event-Location" name="location" />
-        </div>
-
-        <div class="mb-3">
-          <label for="EventHost-DateTime" class="form-label">Event Host Date and Time </label>
           <input
-            type="datetime-local"
+            type="text"
             class="form-control"
-            id="EventHost-DateTime"
-            name="hostDateTime" <!-- Added name attribute -->
+            id="Event-Location"
+            name="location"
           />
         </div>
 
         <div class="mb-3">
-          <label for="Volunteers-Required" class="form-label">Volunteers Required </label>
+          <label for="EventHost-DateTime" class="form-label"
+            >Event Host Date and Time
+          </label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="EventHost-DateTime"
+            name="hostDateTime"
+            <!--
+            Added
+            name
+            attribute
+            --
+          />
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="Volunteers-Required" class="form-label"
+            >Volunteers Required
+          </label>
           <input
             type="number"
             class="form-control"
             id="Volunteers-Required"
             min="1"
-            name="volunteersRequired" <!-- Added name attribute -->
+            name="volunteersRequired"
+            <!--
+            Added
+            name
+            attribute
+            --
+          />
           />
         </div>
 
@@ -119,7 +188,9 @@
           >
             Upload Image
           </button> -->
-          <button id="Submit-Button" class="btn btn-success" type="submit">Submit</button>
+          <button id="Submit-Button" class="btn btn-success" type="submit">
+            Submit
+          </button>
         </div>
       </form>
     </section>
