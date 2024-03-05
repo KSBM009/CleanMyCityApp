@@ -63,7 +63,7 @@
     </section>
 
     <section id="main-form">
-      <form>
+      <form action="/submitEvent" method="POST">
         <h1 align="center">Event Registration</h1>
         <div class="mb-3">
           <label for="Event-Title" class="form-label">Event Title </label>
@@ -116,9 +116,7 @@
           >
             Upload Image
           </button> -->
-          <button id="Submit-Button" class="btn btn-success" type="button">
-            Submit
-          </button>
+          <button id="Submit-Button" class="btn btn-success" type="submit">Submit</button>
         </div>
       </form>
     </section>
@@ -127,5 +125,6 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="app.js"></script>
   </body>
 </html>

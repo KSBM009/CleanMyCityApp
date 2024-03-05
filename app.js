@@ -69,3 +69,48 @@ app.post('/login', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+// Event Schema
+const eventSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  category: String,
+  location: String,
+  dateTime: Date,
+  volunteersRequired: Number,
+});
+
+const Event = mongoose.model('Event', eventSchema);
+
+// Middleware to parse JSON data
+app.use(bodyParser.json());
+
+// Route to handle form submission
+app.post('/submitEvent', async (req, res) => {
+  const {
+    title,
+    description,
+    category,
+    location,
+    dateTime,
+    volunteersRequired,
+  } = req.body;
+
+  try {
+    const newEvent = new Event({
+      title,
+      description,
+      category,
+      location,
+      dateTime,
+      volunteersRequired,
+    });
+
+    await newEvent.save();
+
+    res.status(201).json({ message: 'Event registration successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
