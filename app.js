@@ -11,13 +11,11 @@ const PORT = 3000;
 mongoose.connect('mongodb://localhost:27017/userAuth', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
-const db = mongoose.connection;
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('MongoDB connection error:', err));
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+const db = mongoose.connection;
 
 // User Schema
 const userSchema = new mongoose.Schema({
@@ -29,46 +27,41 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // Configure session middleware
-app.use(
-  session({
-    secret: 'your-secret-key',
-    resave: true,
-    saveUninitialized: true,
-  })
-);
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+}));
 
-// Initialize Passport and session middleware
+// Initialize Passport and use session middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Configure Google OAuth 2.0 strategy
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: 'your-google-client-id',
-      clientSecret: 'your-google-client-secret',
-      callbackURL: 'http://localhost:3000/auth/google/callback',
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      // Check if the user is already in the database
-      const existingUser = await User.findOne({ googleId: profile.id });
+passport.use(new GoogleStrategy({
+    clientID: 'your-google-client-id',
+    clientSecret: 'your-google-client-secret',
+    callbackURL: 'http://localhost:3000/auth/google/callback',
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    // Check if the user is already in the database
+    const existingUser = await User.findOne({ googleId: profile.id });
 
-      if (existingUser) {
-        return done(null, existingUser);
-      }
-
-      // If the user is new, create a new user in the database
-      const newUser = new User({
-        googleId: profile.id,
-        displayName: profile.displayName,
-        // Add other user properties as needed
-      });
-
-      await newUser.save();
-      done(null, newUser);
+    if (existingUser) {
+      return done(null, existingUser);
     }
-  )
-);
+
+    // If the user is new, create a new user in the database
+    const newUser = new User({
+      googleId: profile.id,
+      displayName: profile.displayName,
+      // Add other user properties as needed
+    });
+
+    await newUser.save();
+    done(null, newUser);
+  }
+));
 
 // Serialize user information to store in the session
 passport.serializeUser((user, done) => {
@@ -82,32 +75,22 @@ passport.deserializeUser(async (id, done) => {
 });
 
 // Routes
-app.get('/', (req, res) => {
-  res.send('Home Page');
-});
+app.get('/', (req, res) => res.send('Home Page'));
 
-// Google authentication route
-app.get(
-  '/auth/google',
+app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-// Google authentication callback route
-app.get(
-  '/auth/google/callback',
+app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
-  (req, res) => {
-    res.redirect('/');
-  }
+  (req, res) => res.redirect('/')
 );
 
-// Logout route
 app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
 
-// Profile route (protected route)
 app.get('/profile', isAuthenticated, (req, res) => {
   res.send(`Welcome ${req.user.displayName}!`);
 });
