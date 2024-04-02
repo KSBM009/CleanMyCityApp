@@ -1,0 +1,54 @@
+body {
+  background-color: lightgrey;
+}
+
+.container-head {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.events {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  gap: ;
+  margin: 20px 300px;
+  padding: 10px;
+}
+
+.title-details {
+  display: flex;
+}
+
+.post-details {
+  display: flex;
+}
+
+input {
+  height: 30px;
+  margin-top: 13px;
+  margin-left: 5px;
+  border: none;
+}
+
+button {
+  margin-top: 30px;
+  height: 30px;
+  border: none;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: limegreen;
+}
