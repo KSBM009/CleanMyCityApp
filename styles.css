@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins',sans-serif ;
+
+}
+
+.container{
+    width: 100%;
+    height: 730px;
+    background: url("images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.profile-box{
+  
+    text-align: center;
+    margin-top: 00px;
+    position: relative;
+    
+}
+
+.profile-pic    {
+    width: 150px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 6px;
+   
+    
+}
+.profile-content{
+
+    margin: 100px;
+}
+
+.profile-info{
+    margin-top: 30px;
+}
+
+.profile-info input{
+    margin: 20px;
+    width: 500px;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    border-bottom: 2px solid sil;
+}
+
+.profile-info input::placeholder{
+    position: relative;
+    text-align: center;
+
+}   
+   
