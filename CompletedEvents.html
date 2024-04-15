@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Completed Events - CLEAN MY CITY</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="event.css" />
+  </head>
+  <body>
+    <div class="background-img">
+      <nav class="nav-bar">
+        <h1 class="title">CLEAN MY CITY</h1>
+        <div class="nav-right">
+          <a href="UpcomingEvents.html">Upcoming Events</a>
+          <a href="CompletedEvents.html">Completed Events</a>
+          <a href="user-profile.html">User Profile</a>
+        </div>
+      </nav>
+      <div class="container" id="completedEventContainer">
+        <!-- Completed event cards will be dynamically added here -->
+      </div>
+    </div>
+
+    <script>
+      // JavaScript Functionality for Completed Events Page
+
+      const completedEvents = [
+        {
+          location: "Park near downtown",
+          dateTime: "2024-04-10T09:00:00",
+          beforeImage: "path/to/before_image.jpg",
+          afterImage: "path/to/after_image.jpg",
+        },
+        // Add more completed events here...
+      ];
+
+      function showCompletedEvents() {
+        const completedEventContainer = document.getElementById(
+          "completedEventContainer"
+        );
+        completedEventContainer.innerHTML = ""; // Clear previous content
+
+        completedEvents.forEach((event) => {
+          const eventCard = createCompletedEventCard(event);
+          completedEventContainer.appendChild(eventCard);
+        });
+      }
+
+      function createCompletedEventCard(event) {
+        const eventCard = document.createElement("div");
+        eventCard.classList.add("items");
+
+        const beforeImage = document.createElement("img");
+        beforeImage.src = event.beforeImage;
+        beforeImage.alt = "Before Cleaning Image";
+        beforeImage.style.width = "100%";
+        eventCard.appendChild(beforeImage);
+
+        const afterImage = document.createElement("img");
+        afterImage.src = event.afterImage;
+        afterImage.alt = "After Cleaning Image";
+        afterImage.style.width = "100%";
+        eventCard.appendChild(afterImage);
+
+        const locationDateTime = document.createElement("p");
+        locationDateTime.textContent = `Location: ${
+          event.location
+        } | Date & Time: ${new Date(event.dateTime).toLocaleString()}`;
+        eventCard.appendChild(locationDateTime);
+
+        return eventCard;
+      }
+
+      // Display completed events on page load
+      showCompletedEvents();
+    </script>
+  </body>
+</html>

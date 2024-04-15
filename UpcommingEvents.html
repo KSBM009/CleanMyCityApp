@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Upcoming Events - CLEAN MY CITY</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="event.css" />
+  </head>
+  <body>
+    <div class="background-img">
+      <nav class="nav-bar">
+        <h1 class="title">CLEAN MY CITY</h1>
+        <div class="nav-right">
+          <a href="UpcomingEvents.html">Upcoming Events</a>
+          <a href="CompletedEvents.html">Completed Events</a>
+          <a href="user-profile.html">User Profile</a>
+        </div>
+      </nav>
+      <div class="container" id="eventContainer">
+        <!-- Event cards will be dynamically added here -->
+      </div>
+    </div>
+
+    <script>
+      // JavaScript Functionality
+
+      const upcomingEvents = [
+        {
+          imageUrl: "path/to/image1.jpg",
+          participants: 10,
+          participantsRequired: 20,
+          location: "Park near downtown",
+          dateTime: "2024-04-20T09:00:00",
+        },
+        {
+          imageUrl: "path/to/image2.jpg",
+          participants: 5,
+          participantsRequired: 15,
+          location: "Riverside cleanup",
+          dateTime: "2024-04-25T10:00:00",
+        },
+        // Add more upcoming events here...
+      ];
+
+      function showUpcomingEvents() {
+        const eventContainer = document.getElementById("eventContainer");
+        eventContainer.innerHTML = ""; // Clear previous content
+
+        upcomingEvents.forEach((event) => {
+          const eventCard = createEventCard(event);
+          eventContainer.appendChild(eventCard);
+        });
+      }
+
+      function createEventCard(event) {
+        const eventCard = document.createElement("div");
+        eventCard.classList.add("items");
+
+        const image = document.createElement("img");
+        image.src = event.imageUrl;
+        image.alt = "Event Image";
+        image.style.width = "100%";
+        eventCard.appendChild(image);
+
+        const progressBar = document.createElement("div");
+        const progress =
+          (event.participants / event.participantsRequired) * 100;
+        progressBar.style.backgroundColor = "#4caf50";
+        progressBar.style.color = "white";
+        progressBar.style.padding = "10px 15px";
+        progressBar.style.borderRadius = "4px";
+        progressBar.style.width = `${progress}%`;
+        progressBar.textContent = `${progress}% (${event.participants}/${event.participantsRequired} participants)`;
+        eventCard.appendChild(progressBar);
+
+        const locationDateTime = document.createElement("p");
+        locationDateTime.textContent = `Location: ${
+          event.location
+        } | Date & Time: ${new Date(event.dateTime).toLocaleString()}`;
+        eventCard.appendChild(locationDateTime);
+
+        const viewDetailsBtn = document.createElement("button");
+        viewDetailsBtn.textContent = "View Details";
+        viewDetailsBtn.addEventListener("click", () => viewEventDetails(event));
+        eventCard.appendChild(viewDetailsBtn);
+
+        return eventCard;
+      }
+
+      function viewEventDetails(event) {
+        // Redirect to event details page with query parameters
+        window.location.href = `EventDetails.html?location=${event.location}&dateTime=${event.dateTime}`;
+      }
+
+      // Display upcoming events on page load
+      showUpcomingEvents();
+    </script>
+  </body>
+</html>
