@@ -1,7 +1,8 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
+const express = require('express');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const session = require('express-session');
 
 // const app = express();
 const PORT = 5500;
@@ -20,60 +21,93 @@ mongoose.connect(
 
 // User Schema
 const userSchema = new mongoose.Schema({
-  emailId: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
+  googleId: String,
+  displayName: String,
+  // Add other user properties as needed
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
+// Configure session middleware
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+}));
 
-// Signup Route
-app.post("/signup", async (req, res) => {
-  const { emailId, password } = req.body;
+// Initialize Passport and use session middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
-  try {
-    // Hash the password before saving it to the database
-    const hashedPassword = await bcrypt.hash(password, 10);
+// Configure Google OAuth 2.0 strategy
+passport.use(new GoogleStrategy({
+    clientID: 'your-google-client-id',
+    clientSecret: 'your-google-client-secret',
+    callbackURL: 'http://localhost:3000/auth/google/callback',
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    // Check if the user is already in the database
+    const existingUser = await User.findOne({ googleId: profile.id });
 
-    const newUser = new User({ emailId, password: hashedPassword });
+    if (existingUser) {
+      return done(null, existingUser);
+    }
+
+    // If the user is new, create a new user in the database
+    const newUser = new User({
+      googleId: profile.id,
+      displayName: profile.displayName,
+      // Add other user properties as needed
+    });
+
     await newUser.save();
-
-    res.status(201).json({ message: "User registered successfully" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    done(null, newUser);
   }
+));
+
+// Serialize user information to store in the session
+passport.serializeUser((user, done) => {
+  done(null, user.id);
 });
 
-// Login Route
-app.post("/login", async (req, res) => {
-  const { emailId, password } = req.body;
-
-  try {
-    const user = await User.findOne({ emailId });
-
-    if (!user) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    const passwordMatch = await bcrypt.compare(password, user.password);
-
-    if (!passwordMatch) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
-
-    res.status(200).json({ message: "Login successful" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
+// Deserialize user from the session
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user);
 });
+
+// Routes
+app.get('/', (req, res) => res.send('Home Page'));
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => res.redirect('/')
+);
+
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+app.get('/profile', isAuthenticated, (req, res) => {
+  res.send(`Welcome ${req.user.displayName}!`);
+});
+
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+}
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+<<<<<<< HEAD
 
 // Event Schema
 const eventSchema = new mongoose.Schema({
@@ -141,3 +175,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+=======
+>>>>>>> origin/adminDashboard
