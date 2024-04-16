@@ -1,6 +1,7 @@
 body {
   background-image: url("images/profile.jpg");
   background-size: cover;
+  font-family: sans-serif;
 }
 
 .container-nav {
