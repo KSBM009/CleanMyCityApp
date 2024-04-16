@@ -218,18 +218,18 @@
 
       // Google Sign-In function
       const googleSignIn = async () => {
-            const provider = new GoogleAuthProvider();
-            try {
-                const result = await signInWithPopup(auth, provider);
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                const user = result.user;
-                console.log(user);
-                window.location.href = 'events.html'; // Redirect to events page on successful login
-            } catch (error) {
-                console.error(error.message);
-            }
-        };
+        const provider = new firebase.auth.GoogleAuthProvider();
+        try {
+          const result = await firebase.auth().signInWithPopup(provider);
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          const user = result.user;
+          console.log(user);
+          window.location.href = 'events.html'; // Redirect to events page on successful login
+        } catch (error) {
+          console.error(error.message);
+        }
+      };
   </script>
   </body>
 </html>
