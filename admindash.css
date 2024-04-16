@@ -3,6 +3,18 @@ body {
   background-size: cover;
 }
 
+.container-nav{
+   background-image: url("images/profile.jpg");
+   background-size: cover;
+}
+#nav-img{
+  width: 100px;
+  background-image: url("images/profile.jpg");
+   background-size: cover;
+   border-radius: 5px;
+
+}
+
 .container-head {
   display: flex;
   justify-content: center;
