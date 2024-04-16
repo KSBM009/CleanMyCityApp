@@ -1,5 +1,6 @@
 body {
-  background-color: lightgrey;
+  background-image: url("images/profile.jpg");
+  background-size: cover;
 }
 
 .container-head {
@@ -18,11 +19,13 @@ body {
 .events {
   display: flex;
   justify-content: space-between;
-  background-color: white;
-  gap: ;
+  background-color: lightgrey;
+border-radius: 5px;
   margin: 20px 300px;
   padding: 10px;
 }
+
+.title-and-postDetail{}
 
 .title-details {
   display: flex;
@@ -32,11 +35,24 @@ body {
   display: flex;
 }
 
+#event-title{
+  position: relative;
+  left: 10px;
+}
+
+#post-name{
+  position: relative;
+  left: 19px;
+}
+
 input {
-  height: 30px;
+  height: 35px;
   margin-top: 13px;
   margin-left: 5px;
   border: none;
+  width: 450px;
+  border-radius: 5px;
+  
 }
 
 button {
