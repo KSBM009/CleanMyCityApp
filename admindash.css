@@ -3,16 +3,23 @@ body {
   background-size: cover;
 }
 
-.container-nav{
-   background-image: url("images/profile.jpg");
-   background-size: cover;
-}
-#nav-img{
-  width: 100px;
+.container-nav {
   background-image: url("images/profile.jpg");
-   background-size: cover;
-   border-radius: 5px;
+  background-size: cover;
+  padding-left: 12px;
+  padding-top: 12px;
+}
+#nav-img {
+  width: 110px;
+  background-image: url("images/profile.jpg");
+  background-size: cover;
+  border-radius: 5px;
 
+}
+
+.heading {
+  color: green;
+  font-size: 2.7rem;
 }
 
 .container-head {
@@ -32,12 +39,13 @@ body {
   display: flex;
   justify-content: space-between;
   background-color: lightgrey;
-border-radius: 5px;
-  margin: 20px 300px;
+  border-radius: 5px;
+  margin: 20px 200px;
   padding: 10px;
 }
 
-.title-and-postDetail{}
+.title-and-postDetail {
+}
 
 .title-details {
   display: flex;
@@ -47,12 +55,12 @@ border-radius: 5px;
   display: flex;
 }
 
-#event-title{
+#event-title {
   position: relative;
   left: 10px;
 }
 
-#post-name{
+#post-name {
   position: relative;
   left: 19px;
 }
@@ -62,9 +70,8 @@ input {
   margin-top: 13px;
   margin-left: 5px;
   border: none;
-  width: 450px;
+  width: 750px;
   border-radius: 5px;
-  
 }
 
 button {
