@@ -230,7 +230,7 @@
 
         // Google Sign-Up function
       const googleSignIn = async () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
+        const provider = new firebase.auth.GoogleAuthProvider(app);
         try {
           const result = await firebase.auth().signInWithPopup(provider);
           const credential = GoogleAuthProvider.credentialFromResult(result);
