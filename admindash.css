@@ -21,13 +21,24 @@ body {
   margin-top: 15px;
 }
 
-#nav-profile{
+#nav-profile-button{
   border-radius: 90px;
   background-image: url("images/profile.jpg");
+  width: 40px;
+  height: 40px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  margin: 25px;
+
 }
 
 .nav-profile-img{
   width: 40px;
+  height: 40px;
+  border: none;
+  color: white;
+  border-radius: 5px;
 }
 
 .heading {
@@ -88,7 +99,7 @@ input {
   border-radius: 5px;
 }
 
-button {
+.events-button {
   margin-top: 30px;
   height: 40px;
   border: none;
