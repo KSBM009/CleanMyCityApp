@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.5rem;
+}
+
+@media (min-width: 375px) {
+  body {
+    background-image: url("images/profile.jpg");
+    background-size: auto;
+  }
+
+  /* navbar-section */
+ 
+  .navbar{
+    background-image: url("images/profile.jpg");
+    background-size: auto;
+  }
+
+}
