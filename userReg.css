@@ -5,6 +5,9 @@
   padding-left: 0.5rem;
 }
 
+
+/* MOBILE SCREEN */
+
 @media (min-width: 375px) {
   body {
     background-image: url("images/profile.jpg");
@@ -17,5 +20,22 @@
     background-image: url("images/profile.jpg");
     background-size: auto;
   }
+
+
+     /*-- FORM SECTION  */
+
+     form{
+        padding-top: 30px;
+     }
+
+     .btn{
+        width: 392px;
+        margin-top: 20px;
+     }
+
+     .btn-icon,
+     .btn-text{
+        padding: 5px;
+     }
 
 }
