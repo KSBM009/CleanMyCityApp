@@ -80,14 +80,19 @@
 
   form {
     width: 800px;
-    background-color: #C7C8CC;
+    background-color: lightgrey;
     padding: 40px;
     border-radius: 10px;
     margin-top: 50px;
+    border: solid;
+    border-color: green;
   }
+
+
+
   .full-form {
     position: relative;
-    left: 200px;
+    left: 210px;
   }
 
   .btn {

@@ -30,9 +30,9 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <h1 >Clean My City <i class="fa-solid fa-leaf"></i></h1>
+          <h1>Clean My City <i class="fa-solid fa-leaf"></i></h1>
         </a>
-        
+
       </div>
     </nav>
 
@@ -40,13 +40,13 @@
 
 
     <div class="full-form">
-      
+
       <form id="form">
         <h3>Sign Up</h3>
         <div class="mb-3">
           <label for="user-name" class="form-label" id="user-name">User name</label>
           <input type="text" class="form-control" id="inputUser-name" required>
-
+          <span id="username-span"></span>
         </div>
 
         <div class="mb-3">
@@ -57,13 +57,18 @@
 
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="inputPassword" required>
+          <div class="passowrd-container">
+            <input type="password" class="form-control" id="inputPassword" required>
+
+          </div>
+          <span id="password-span"></span>
         </div>
 
 
         <div class="mb-3">
           <label for="confirmPassword" class="form-label">Confirm Password</label>
           <input type="password" class="form-control" id="input-confirmPassword" required>
+          <span id="confirmPassword-span"></span>
         </div>
 
 
@@ -99,6 +104,18 @@
 
   function validation() {
 
+    // USER NAME
+
+    var userName = document.getElementById("inputUser-name").value;
+    var userNameBox = document.getElementById("inputUser-name")
+    var userNameSpan = document.getElementById("username-span");
+
+
+    if (userName.length === 0) {
+      userNameSpan.textContent = "invalid";
+      userNameSpan.style.color = "red";
+    }
+
     //  EMAIL VALIDATION
 
     var form = document.getElementById("form");
@@ -110,21 +127,65 @@
     if (email.match(pattern)) {
       form.classList.add("valid");
       form.classList.remove("invalid");
+      emailSpan.innerHTML = "";
+      emailSpan.style.border = "none";
+      emailBox.style.borderColor = "";
+
 
     } else {
       form.classList.remove("valid");
       form.classList.add("invalid");
-      emailSpan.innerHTML = "invalid";
+      emailSpan.innerHTML = "email is invalid";
       emailSpan.style.color = "red";
       emailBox.style.borderColor = "red";
     }
+
+    //  PASSOWORD
+
+    var password = document.getElementById("inputPassword").value;
+    var passwordBox = document.getElementById("inputPassword");
+    var passwordSpan = document.getElementById("password-span");
+
+    var hasUpperCase = /[A-Z]/.test(password);
+    var hasLowerCase = /[a-z]/.test(password);
+    var hasNumbers = /\d/.test(password);
+    var hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    var isValid = hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChars;
+
+    if (!isValid) {
+      passwordSpan.textContent = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+      passwordSpan.style.color = "red";
+      passwordBox.style.borderColor = "red";
+    } else {
+      passwordBox.style.border = "none";
+      passwordSpan.textContent = ""
+    }
+
+    // CONFIRM PASSOWORD
+
+    var confirmPassword = document.getElementById("input-confirmPassword").value;
+    var confirmPasswordBox = document.getElementById("input-confirmPassword");
+    var confirmPasswordSpan = document.getElementById("confirmPassword-span");
+
+    if (password === confirmPassword) {
+      confirmPasswordSpan.textContent = ""
+      confirmPasswordBox.style.border = "none";
+    }
+    else {
+      confirmPasswordSpan.textContent = "password does not match"
+      confirmPasswordSpan.style.color = "red";
+      confirmPasswordBox.style.borderColor = "red";
+    }
+
+
+
 
     // PHONE VALIDATION
 
     var phoneNumber = document.getElementById("input-phoneNumber").value;
     var phoneNumberBox = document.getElementById("input-phoneNumber")
     var phoneNumberSpan = document.getElementById("phoneNumber-span")
-    if (phoneNumber < 10 || phoneNumber > 10) {
+    if (phoneNumber.length < 10 || phoneNumber.length > 10) {
       phoneNumberSpan.innerHTML = "invalid"
       phoneNumberSpan.style.color = "red";
       phoneNumberBox.style.borderColor = "red";
