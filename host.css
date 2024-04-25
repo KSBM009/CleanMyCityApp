@@ -1,0 +1,234 @@
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* MOBILE SCREEN */
+
+@media (min-width: 405px) {
+  .container {
+    max-width: 405px;
+  }
+
+  body {
+    background-image: url("images/profile.jpg");
+    background-size: auto;
+  }
+
+  /* navbar-section */
+
+  .navbar {
+    background-image: url("images/profile.jpg");
+    background-size: auto;
+    margin-top: 20px;
+  }
+
+  h1 {
+    font-family: "Pacifico", cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
+    color: green;
+    margin-top: 30px;
+  }
+
+  .btn {
+    width: 312px;
+    margin-top: 20px;
+    position: relative;
+    left: 35px;    
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+}
+
+form{
+    border: solid;
+    border-radius: 10px;
+    border-color: green;
+    padding: 10px;
+}
+
+/* sm */
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+
+  /* h1 {
+    font-family: "Pacifico", cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 29px;
+    color: green;
+    margin-top: 30px;
+  } */
+
+  .btn {
+    width: 312px;
+    margin-top: 20px;
+    position: relative;
+    left: 150px;    
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+
+
+  
+}
+
+/* md */
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+
+  h1 {
+    font-family: "Pacifico", cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 29px;
+    color: green;
+    margin-top: 30px;
+  }
+
+  .btn {
+    width: 380px;
+    margin-top: 20px;
+    position: relative;
+    left: 180px;    
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+}
+
+/* lg */
+@media (min-width: 991px) {
+  .container {
+    max-width: 991px;
+  }
+
+
+
+  .nav-item{
+    position: relative;
+    left: 460px;
+  }
+
+  .user-profile{
+    margin-top: 5px;
+  
+  }
+
+  #profile{
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    padding: 10;
+  }
+
+  form{
+    width: 650px;
+    position: relative;
+    left: 150px;
+  }
+
+  .btn {
+    width: 380px;
+    margin-top: 20px;
+    position: relative;
+    left: 130px;    
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+
+}
+
+/* xl */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+
+  .nav-item{
+    position: relative;
+    left: 750px;
+  }
+
+  .user-profile{
+    margin-top: 5px;
+  
+  }
+
+  #profile{
+    color: white;
+    background-color: black;
+  }
+
+  form{
+    width: 650px;
+    position: relative;
+    left: 270px;
+  }
+
+  .btn {
+    width: 380px;
+    margin-top: 20px;
+    position: relative;
+    left: 130px;    
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+
+}
+
+/* 2xl */
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+
+  h1 {
+    font-family: "Pacifico", cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 39px;
+    color: green;
+    margin-top: 30px;
+  }
+
+  .nav-item{
+    position: relative;
+    left: 885px;
+    font-size: 20px;
+  }
+
+  .full-form{
+    width: 800px;
+    position: relative;
+    left: 150px;
+  }
+
+  form{
+    padding: 40px;
+    padding-top: 50px;
+  }
+}
