@@ -31,9 +31,7 @@
         <!-- FORM SECTION -->
         <div class="full-form">
             <form id="form">
-                <h3>
-                    Admin Login
-                </h3>
+                <h3>Login as An Admin</h3>
                 <div class="mb-3">
                     <label for="email" class="form-label" id="email">Email</label>
                     <input type="email" class="form-control" id="input-email" required>
@@ -53,4 +51,40 @@
         crossorigin="anonymous">
     </script>
 </body>
+<script>
+    const form = document.getElementById('form');
+    const email = document.getElementById('input-email');
+    const password = document.getElementById('input-password');
+    const emailSpan = document.getElementById('email-span');
+    const passwordSpan = document.getElementById('password-span');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        checkInputs();
+    });
+    function checkInputs() {
+        const emailValue = email.value.trim();
+        const passwordValue = password.value.trim();
+        if (emailValue === '') {
+            setErrorFor(email, 'Email cannot be blank');
+        } else {
+            setSuccessFor(email);
+        }
+        if (passwordValue === '') {
+            setErrorFor(password, 'Password cannot be blank');
+        } else {
+            setSuccessFor(password);
+        }
+    }
+    function setErrorFor(input, message) {
+        const formControl = input.parentElement;
+        const small = formControl.querySelector('span');
+        small.innerText = message;
+        small.style.color = 'red';
+    }
+    function setSuccessFor(input) {
+        const formControl = input.parentElement;
+        const small = formControl.querySelector('span');
+        small.innerText = '';
+    }
+</script>
 </html>
