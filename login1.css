@@ -1,0 +1,212 @@
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* xs */
+@media (min-width: 405px) {
+  .container {
+    max-width: 405px;
+  }
+
+  h1 {
+    font-family: "Pacifico", cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
+    color: green;
+    margin-top: 30px;
+  }
+
+  /* h3{
+    position: relative;
+    left: 400px;
+  } */
+
+  form {
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+    width: 400px;
+  }
+
+  .btn {
+    width: 312px;
+    margin-top: 20px;
+    position: relative;
+    left: 35px;
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+
+  .signup{
+    position: relative;
+    left: 75px;
+  }
+}
+
+/* sm */
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+
+  form {
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+    width: 623px;
+  }
+
+  .btn {
+    width: 312px;
+    margin-top: 20px;
+    position: relative;
+    left: 130px;
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+  .signup {
+    position: relative;
+    left: 165px;
+  }
+}
+
+/* md */
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+
+  form {
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+    width: 752px;
+  }
+
+  .btn {
+    width: 362px;
+    margin-top: 20px;
+    position: relative;
+    left: 160px;
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+
+  .signup {
+    position: relative;
+    left: 220px;
+  }
+}
+
+/* lg */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+
+  h1 {
+    font-family: "Pacifico", cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 35px;
+    color: green;
+    margin-top: 30px;
+  }
+
+  form {
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+    width: 1006px;
+  }
+
+  .btn {
+    width: 490px;
+    margin-top: 20px;
+    position: relative;
+    left: 230px;
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+
+  .signup {
+    position: relative;
+    left: 360px;
+  }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+
+  h1 {
+    font-family: "Pacifico", cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 45px;
+    color: green;
+    margin-top: 30px;
+  }
+
+  h3{
+    position: relative;
+    left: 350px;
+  }
+
+  form {
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 40px;
+    width: 1000px;
+    position: relative;
+    left: 300px;
+  }
+
+  .btn {
+    width: 490px;
+    margin-top: 20px;
+    position: relative;
+    left: 200px;
+  }
+
+  .btn-icon,
+  .btn-text {
+    padding: 2px;
+  }
+
+  .signup {
+    position: relative;
+    left: 360px;
+  }
+}
+
+/* 2xl */
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
