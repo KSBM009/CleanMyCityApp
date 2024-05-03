@@ -4,79 +4,207 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Completed Events - CLEAN MY CITY</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="event.css" />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Open Sans", sans-serif;
+        background-color: lightgray;
+      }
+
+      .background-img {
+        background-image: url("./Images/profile (1).jpg");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        padding: 20px;
+      }
+
+      .nav-bar {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+      }
+
+      .nav-bar a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease; /* Apply transition effect to text color change */
+        font-weight: bold; /* Increase text thickness */
+      }
+
+      .nav-bar a:hover {
+        color: #4caf50; /* Change text color on hover to green */
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .completed-event-card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+        text-align: center; /* Center-align content within the card */
+      }
+
+      .event-details {
+        margin-bottom: 15px;
+      }
+
+      .event-details p {
+        margin-bottom: 5px;
+      }
+
+      .event-details img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .view-details-btn {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Apply transition effect to button background color change */
+      }
+
+      .view-details-btn:hover {
+        background-color: #45a049; /* Change button background color on hover */
+      }
+    </style>
   </head>
   <body>
     <div class="background-img">
-      <nav class="nav-bar">
-        <h1 class="title">CLEAN MY CITY</h1>
-        <div class="nav-right">
-          <a href="UpcomingEvents.html">Upcoming Events</a>
-          <a href="CompletedEvents.html">Completed Events</a>
-          <a href="user-profile.html">User Profile</a>
+      <nav class="navbar navbar-expand-lg nav-bar">
+        <a class="navbar-brand" href="home.html">CLEAN MY CITY</a>
+        <div class="navbar-collapse collapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="UpcomingEvents.html">Upcoming Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="CompletedEvents.html"
+                >Completed Events</a
+              >
+            </li>
+          </ul>
         </div>
       </nav>
+
       <div class="container" id="completedEventContainer">
         <!-- Completed event cards will be dynamically added here -->
       </div>
     </div>
 
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
       // JavaScript Functionality for Completed Events Page
 
-      const completedEvents = [
-        {
-          location: "Park near downtown",
-          dateTime: "2024-04-10T09:00:00",
-          beforeImage: "path/to/before_image.jpg",
-          afterImage: "path/to/after_image.jpg",
-        },
-        // Add more completed events here...
-      ];
-
-      function showCompletedEvents() {
+      document.addEventListener("DOMContentLoaded", () => {
         const completedEventContainer = document.getElementById(
           "completedEventContainer"
         );
-        completedEventContainer.innerHTML = ""; // Clear previous content
 
-        completedEvents.forEach((event) => {
-          const eventCard = createCompletedEventCard(event);
-          completedEventContainer.appendChild(eventCard);
-        });
-      }
+        // Simulated completed events data
+        const completedEvents = [
+          {
+            beforeImage: "path/to/before-image1.jpg",
+            afterImage: "path/to/after-image1.jpg",
+            location: "City Park",
+            dateTime: "2024-04-15T10:00:00",
+            details: "A successful cleaning event at City Park.",
+          },
+          {
+            beforeImage: "path/to/before-image2.jpg",
+            afterImage: "path/to/after-image2.jpg",
+            location: "Community Center",
+            dateTime: "2024-04-20T14:30:00",
+            details: "Community cleanup initiative at the local center.",
+          },
+          // Add more event data as needed
+        ];
 
-      function createCompletedEventCard(event) {
-        const eventCard = document.createElement("div");
-        eventCard.classList.add("items");
+        renderCompletedEvents(completedEvents);
 
-        const beforeImage = document.createElement("img");
-        beforeImage.src = event.beforeImage;
-        beforeImage.alt = "Before Cleaning Image";
-        beforeImage.style.width = "100%";
-        eventCard.appendChild(beforeImage);
+        function renderCompletedEvents(events) {
+          completedEventContainer.innerHTML = ""; // Clear previous content
 
-        const afterImage = document.createElement("img");
-        afterImage.src = event.afterImage;
-        afterImage.alt = "After Cleaning Image";
-        afterImage.style.width = "100%";
-        eventCard.appendChild(afterImage);
+          events.forEach((event) => {
+            const eventCard = createCompletedEventCard(event);
+            completedEventContainer.appendChild(eventCard);
+          });
+        }
 
-        const locationDateTime = document.createElement("p");
-        locationDateTime.textContent = `Location: ${
-          event.location
-        } | Date & Time: ${new Date(event.dateTime).toLocaleString()}`;
-        eventCard.appendChild(locationDateTime);
+        function createCompletedEventCard(event) {
+          const eventCard = document.createElement("div");
+          eventCard.classList.add("completed-event-card");
 
-        return eventCard;
-      }
+          // Create top section for before/after images
+          const imagesContainer = document.createElement("div");
 
-      // Display completed events on page load
-      showCompletedEvents();
+          const beforeImage = document.createElement("img");
+          beforeImage.src = event.beforeImage;
+          beforeImage.alt = "Before Cleaning Image";
+          beforeImage.classList.add("mb-3"); // Add margin-bottom to the image
+          imagesContainer.appendChild(beforeImage);
+
+          const afterImage = document.createElement("img");
+          afterImage.src = event.afterImage;
+          afterImage.alt = "After Cleaning Image";
+          imagesContainer.appendChild(afterImage);
+
+          // Create bottom section for event details and button
+          const eventDetails = document.createElement("div");
+          eventDetails.classList.add("event-details");
+
+          const dateTimePara = document.createElement("p");
+          const dateTime = new Date(event.dateTime).toLocaleString();
+          dateTimePara.textContent = `Date & Time: ${dateTime}`;
+          eventDetails.appendChild(dateTimePara);
+
+          const locationPara = document.createElement("p");
+          locationPara.textContent = `Location: ${event.location}`;
+          eventDetails.appendChild(locationPara);
+
+          const detailsPara = document.createElement("p");
+          detailsPara.textContent = event.details;
+          eventDetails.appendChild(detailsPara);
+
+          const viewDetailsBtn = document.createElement("button");
+          viewDetailsBtn.textContent = "View Details";
+          viewDetailsBtn.classList.add("view-details-btn");
+          eventDetails.appendChild(viewDetailsBtn);
+
+          // Append sections to the event card
+          eventCard.appendChild(imagesContainer);
+          eventCard.appendChild(eventDetails);
+
+          return eventCard;
+        }
+      });
     </script>
   </body>
 </html>

@@ -1,3 +1,4 @@
+/* General styles */
 body {
   margin: 0;
   padding: 0;
@@ -6,9 +7,10 @@ body {
 }
 
 .background-img {
-  background-image: url("background.jpg");
+  background-image: url("./Images/profile (1).jpg");
   background-size: cover;
   background-position: center;
+  height: 100vh;
   padding: 20px;
 }
 
@@ -16,79 +18,65 @@ body {
   background-color: #333;
   color: #fff;
   padding: 10px;
-  display: flex;
-  align-items: center;
 }
 
 .title {
-  flex-grow: 1;
   font-size: 24px;
-  margin: 0;
-  padding-left: 20px;
-}
-
-.nav-right {
-  display: flex;
-  gap: 10px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
 }
 
 .nav-right a {
   color: #fff;
   text-decoration: none;
-  padding: 5px;
-}
-
-.nav-right a:hover {
-  background-color: #555;
-  border-radius: 4px;
+  margin-left: 20px;
 }
 
 .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding: 20px;
 }
 
-.items {
+.completed-event-card {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   width: 300px;
   padding: 20px;
-  box-sizing: border-box;
 }
 
-.items h2 {
-  color: #959fa8;
-  font-size: 18px;
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image-container img {
+  width: 100%;
+  border-radius: 8px;
   margin-bottom: 10px;
 }
 
-.progbar,
-.viewdet {
+.event-details p {
+  margin-bottom: 10px;
+}
+
+.view-details-btn {
   background-color: #4caf50;
   color: white;
-  padding: 10px 15px;
   border: none;
+  padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
-  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
 }
 
-.progbar:hover,
-.viewdet:hover {
-  background-color: #45a049;
-}
-
-.date-loc {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  color: #959fa8;
-}
-
-.w3-container {
+.view-details-btn:hover {
   background-color: #45a049;
 }

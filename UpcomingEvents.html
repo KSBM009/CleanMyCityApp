@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Upcoming Events - CLEAN MY CITY</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Open Sans", sans-serif;
+        background-color: lightgray;
+        transition: color 0.3s ease; /* Apply transition effect to all text color changes */
+      }
+
+      .background-img {
+        background-image: url("./Images/profile (1).jpg");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        padding: 20px;
+      }
+
+      .navbar {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+      }
+
+      .navbar-brand {
+        font-size: 24px;
+        font-weight: bold; /* Increase font weight */
+        color: white; /* Change logo color to white */
+        transition: color 0.3s ease; /* Apply transition effect to logo color change */
+      }
+
+      .navbar-brand:hover {
+        color: #4caf50; /* Change logo color on hover to green */
+      }
+
+      .navbar-nav .nav-link {
+        color: #fff;
+        transition: color 0.3s ease; /* Apply transition effect to nav link color change */
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #4caf50; /* Change nav link color on hover to green */
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      .items {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+      }
+
+      .items h2 {
+        color: #959fa8;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .progbar,
+      .viewdet {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        transition: background-color 0.3s ease; /* Apply transition effect to background color change */
+      }
+
+      .progbar:hover,
+      .viewdet:hover {
+        background-color: #45a049; /* Change button background color on hover to darker green */
+      }
+
+      .date-loc {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        color: #959fa8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-img">
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="home.html">CLEAN MY CITY</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="UpcomingEvents.html">Upcoming Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="CompletedEvents.html"
+                >Completed Events</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container" id="eventContainer">
+        <!-- Event cards will be dynamically added here -->
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // JavaScript Functionality for Upcoming Events Page
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const eventContainer = document.getElementById("eventContainer");
+
+        // Fetch upcoming events from backend or API
+        const upcomingEvents = []; // Replace with actual data fetched from backend
+
+        renderUpcomingEvents(upcomingEvents);
+
+        function renderUpcomingEvents(events) {
+          eventContainer.innerHTML = ""; // Clear previous content
+
+          if (events.length === 0) {
+            const noEventsMessage = document.createElement("p");
+            noEventsMessage.textContent = "No upcoming events.";
+            eventContainer.appendChild(noEventsMessage);
+          } else {
+            events.forEach((event) => {
+              const eventCard = createEventCard(event);
+              eventContainer.appendChild(eventCard);
+            });
+          }
+        }
+
+        function createEventCard(event) {
+          const eventCard = document.createElement("div");
+          eventCard.classList.add("items");
+
+          const image = document.createElement("img");
+          image.src = event.imageUrl;
+          image.alt = "Event Image";
+          image.style.width = "100%";
+          eventCard.appendChild(image);
+
+          const progressBar = document.createElement("div");
+          const progress =
+            (event.participants / event.participantsRequired) * 100;
+          progressBar.classList.add("progbar");
+          progressBar.style.width = `${progress}%`;
+          progressBar.textContent = `${progress.toFixed(0)}% (${
+            event.participants
+          }/${event.participantsRequired} participants)`;
+          eventCard.appendChild(progressBar);
+
+          const locationDateTime = document.createElement("p");
+          locationDateTime.textContent = `Location: ${
+            event.location
+          } | Date & Time: ${new Date(event.dateTime).toLocaleString()}`;
+          locationDateTime.classList.add("date-loc");
+          eventCard.appendChild(locationDateTime);
+
+          const viewDetailsBtn = document.createElement("button");
+          viewDetailsBtn.textContent = "View Details";
+          viewDetailsBtn.classList.add("viewdet");
+          viewDetailsBtn.addEventListener("click", () =>
+            viewEventDetails(event)
+          );
+          eventCard.appendChild(viewDetailsBtn);
+
+          return eventCard;
+        }
+
+        function viewEventDetails(event) {
+          // Redirect to event details page with query parameters
+          const queryParams = `?location=${encodeURIComponent(
+            event.location
+          )}&dateTime=${encodeURIComponent(event.dateTime)}`;
+          window.location.href = `EventDetails.html${queryParams}`;
+        }
+      });
+    </script>
+  </body>
+</html>
