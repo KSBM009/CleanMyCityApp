@@ -161,8 +161,8 @@
         volunteersRequired: volunteersRequired
       }).then(() => {
         // Data saved successfully
-        alert('Event Created!');
-        window.location.href = 'events.html'; // Redirect to events page on successful login
+        alert('Event Created! Please wait for till the admin approves the event to make it live.');
+        window.location.href = 'events.html'; // Redirect to events page on successful Event Creation
       }).catch((err) => {
         // Error
         alert('Error in creating the Event: ' + err);
