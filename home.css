@@ -12,9 +12,20 @@
     max-width: 1380px;
   }
 
+  /* Define animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   body {
     background-color: #eef7ff;
     background-size: auto;
+    animation: fadeIn 1s ease;
   }
 
   h1 {
