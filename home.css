@@ -13,7 +13,7 @@
   }
 
   body {
-    background-image: url("images/profile.jpg");
+    background-color: #EEF7FF;
     background-size: auto;
   }
 
@@ -44,7 +44,7 @@
 
   #main-section {
     padding-top: 100px;
-
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,6 +55,31 @@
     text-align: center;
     margin-top: 20px;
   }
+
+  /* INFO-SECTION */
+
+  #info-section {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-div{
+    padding-bottom: 20px;
+    width: 500px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+
+
+  .info-img{
+    width: 500px;
+    margin-bottom: 20px;
+    border-radius: 10px
+  }
+
 }
 
 /* xl */
