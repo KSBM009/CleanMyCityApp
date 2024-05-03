@@ -64,7 +64,10 @@
   /* MAIN-SECTION */
 
   #main-section {
-    margin: 40px;
+   margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+
   }
 
   .card {
