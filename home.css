@@ -25,7 +25,6 @@
   body {
     animation: fadeIn 1s ease;
   }
-  
 
   h1 {
     font-family: "Pacifico", cursive;
@@ -45,8 +44,7 @@
     padding: 40px;
     background-color: #DDDDDD;
     border-radius: 10px;
-    /* background-image: linear-gradient(to bottom, rgba(221, 221, 221, 1), rgba(221, 221, 221, 0)); */
-}
+  }
 
   .btn {
     background-color: green;

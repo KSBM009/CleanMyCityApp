@@ -29,43 +29,29 @@
 
   <div class="container">
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-custom-color">
       <div class="container-fluid">
-        <div class="nav-title">
-          <a class="navbar-brand" href="#">
-            <h1>Clean My City <i class="fa-solid fa-leaf"></i></h1>
-          </a>
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <h1 class="animate__animated animate__fadeInDown">Clean My City <i class="fa-solid fa-leaf"></i></h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+              <a class="nav-link" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href=".\events.html">Events</a>
+              <a class="nav-link" href="events.html">Events</a>
             </li>
+
 
             <!-- <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
-            </li> -->
+                      <a class="nav-link" href="">About Us </a>
+                  </li> -->
 
-            <li class="nav-item">
-              <div class="user-profile">
-                <button id="profile">
-                  <span class="userProfile-span">User</span>
-                  <span id="profile-img" class="userProfile-span"><i class="fa-solid fa-circle-user"></i></span>
-                </button>
-              </div>
-            </li>
           </ul>
         </div>
-
-
-
       </div>
     </nav>
 
@@ -100,13 +86,13 @@
         <div class="mb-3">
           <label for="EventLocation" class="form-label">Event Location</label>
           <input type="text" class="form-control" id="input-EventLocation" required>
-          <span id="confirmPassword-span"></span>
+          <span id="EventLocation-span"></span>
         </div>
 
 
         <div class="mb-3">
           <label for="eventDate" class="form-label">Event Date</label>
-          <input type="date" class="form-control" id="input-eventDate" required>
+          <input type="datetime-local" class="form-control" id="input-eventDate" required>
           <span id="eventDate-span"></span>
         </div>
 
@@ -131,5 +117,135 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+  // DATE VALIDATION
+  var now = new Date();
+  now.setDate(now.getDate() + 1); // Add 1 to get the next day
+  var year = now.getFullYear();
+  var month = ('0' + (now.getMonth() + 1)).slice(-2); // Adding 1 because months are 0-indexed
+  var day = ('0' + now.getDate()).slice(-2);
+  var hour = ('0' + now.getHours()).slice(-2);
+  var minute = ('0' + now.getMinutes()).slice(-2);
+  var currentDateTime = year + '-' + month + '-' + day + 'T' + hour + ':' + minute;
+
+  // Set the minimum date and time for the input field
+  document.getElementById('input-eventDate').min = currentDateTime;
+
+  // VALIDATION
+
+  var btn = document.getElementById('submit-button');
+
+  function validation() {
+
+    // EVENT TITLE VALIDATION
+    var eventTitle = document.getElementById('input-eventTitle').value;
+    var eventTitleBox = document.getElementById('input-eventTitle');
+    var eventTitleSpan = document.getElementById('eventTitle-span');
+
+    if (eventTitle.length === 0) {
+      eventTitleSpan.textContent = "This value is required";
+      eventTitleSpan.style.color = "red";
+    }
+    if (eventTitle.length > 0) {
+      eventTitleSpan.textContent = "";
+      eventTitleSpan.style.color = "";
+    }
+
+    // EVENT DESCRIPTION VALIDATION
+
+    var eventDescription = document.getElementById('input-eventDescription').value;
+    var eventDescriptionBox = document.getElementById('input-eventDescription');
+    var eventDescriptionSpan = document.getElementById('eventDescription-span');
+
+    if (eventDescription.length === 0) {
+      eventDescriptionSpan.textContent = "This value is required";
+      eventDescriptionSpan.style.color = "red";
+    }
+    if (eventDescription.length > 0) {
+      eventDescriptionSpan.textContent = "";
+      eventDescriptionSpan.style.color = "";
+    }
+
+    // EVENT CATEGORY VALIDATION
+
+    var eventCategory = document.getElementById('input-eventCategory').value;
+    var eventCategoryBox = document.getElementById('input-eventCategory');
+    var eventCategorySpan = document.getElementById('eventCategory-span');
+
+    if (eventCategory.length === 0) {
+      eventCategorySpan.textContent = "This value is required";
+      eventCategorySpan.style.color = "red";
+    }
+    if (eventCategory.length > 0) {
+      eventCategorySpan.textContent = "";
+      eventCategorySpan.style.color = "";
+    }
+
+    // EVENT LOCATION VALIDATION
+
+    var eventLocation = document.getElementById('input-EventLocation').value;
+    var eventLocationBox = document.getElementById('input-EventLocation');
+    var eventLocationSpan = document.getElementById('EventLocation-span');
+
+    if (eventLocation.length === 0) {
+      eventLocationSpan.textContent = "This value is required";
+      eventLocationSpan.style.color = "red";
+    }
+    if (eventLocation.length > 0) {
+      eventLocationSpan.textContent = "";
+      eventLocationSpan.style.color = "";
+    }
+
+    // EVENT DATE VALIDATION
+
+    var eventDate = document.getElementById('input-eventDate').value;
+    var eventDateBox = document.getElementById('input-eventDate');
+    var eventDateSpan = document.getElementById('eventDate-span');
+
+    if (eventDate < currentDateTime) {
+      eventDateSpan.textContent = "This value is required";
+      eventDateSpan.style.color = "red";
+    }
+    if (eventDate > currentDateTime) {
+      eventDateSpan.textContent = "";
+      eventDateSpan.style.color = "";
+    }
+
+
+
+    // VOLUNTEER PARTICIPATION VALIDATION
+    var volunteerRequired = document.getElementById('input-volunteerRequired').value;
+    var volunteerRequiredBox = document.getElementById('input-volunteerRequired');
+    var volunteerRequiredSpan = document.getElementById('volunteerRequired-span');
+
+    if (volunteerRequired < 7) {
+      volunteerRequiredSpan.textContent = "minimum 7 volunteers required";
+      volunteerRequiredSpan.style.color = "red";
+    }
+    if (volunteerRequired > 7) {
+      volunteerRequiredSpan.textContent = "";
+      volunteerRequiredSpan.style.color = "";
+    }
+
+
+
+  }
+
+  btn.addEventListener("click", validation);
+
+  // VOLUNTEER VALDIATION
+
+
+
+
+
+
+
+</script>
 
 </html>

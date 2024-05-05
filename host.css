@@ -1,240 +1,98 @@
 .container {
-  width: 100%;
+  max-width: 1536px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-/* MOBILE SCREEN */
-
-@media (min-width: 405px) {
+/* 2xl */
+@media (max-width: 1536px) {
   .container {
-    max-width: 405px;
+    max-width: 1536px;
   }
 
   body {
     background-image: url("images/profile.jpg");
-    background-size: auto;
-  }
-
-  /* navbar-section */
-
-  .navbar {
-    background-image: url("images/profile.jpg");
-    background-size: auto;
-    margin-top: 20px;
+    background-size: cover;
   }
 
   h1 {
     font-family: "Pacifico", cursive;
     font-weight: 700;
     font-style: normal;
-    font-size: 25px;
+    font-size: 35px;
     color: green;
-    margin-top: 30px;
-  }
-
-  .btn {
-    width: 312px;
     margin-top: 20px;
     position: relative;
-    left: 35px;
+    bottom: 5px;
+    left: 5px;
   }
 
-  .btn-icon,
-  .btn-text {
-    padding: 2px;
-  }
-}
-
-form {
-  width: 500px;
-  border: solid;
-  border-radius: 10px;
-  border-color: green;
-  padding: 10px;
-  background-color: lightgrey;
-}
-
-/* sm */
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-
-  /* h1 {
-    font-family: "Pacifico", cursive;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 29px;
-    color: green;
-    margin-top: 30px;
-  } */
-
-  .btn {
-    width: 312px;
-    margin-top: 20px;
-    position: relative;
-    left: 150px;
-  }
-
-  .btn-icon,
-  .btn-text {
-    padding: 2px;
-  }
-}
-
-/* md */
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-
-  h1 {
-    font-family: "Pacifico", cursive;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 29px;
-    color: green;
-    margin-top: 30px;
-  }
-
-  .btn {
-    width: 380px;
-    margin-top: 20px;
-    position: relative;
-    left: 180px;
-  }
-
-  .btn-icon,
-  .btn-text {
-    padding: 2px;
-  }
-}
-
-/* lg */
-@media (min-width: 991px) {
-  .container {
-    max-width: 991px;
-  }
-
-  .nav-item {
-    position: relative;
-    left: 460px;
-  }
-
-  .user-profile {
-    margin-top: 5px;
-  }
-
-  #profile {
-    color: white;
-    background-color: black;
+  nav {
+    max-width: 1536px;
+    background-color: lightgrey;
+    margin-top: 10px;
     border-radius: 10px;
-    padding: 10;
+    padding: 40px;
+    background-color: #dddddd;
   }
 
   form {
-    width: 650px;
+    width: 500px;
     position: relative;
-    left: 150px;
+    left: 480px;
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: lightgrey;
+    margin-top: 50px;
   }
 
   .btn {
-    width: 380px;
-    margin-top: 20px;
+    width: 250px;
     position: relative;
-    left: 130px;
+    left: 120px;
+    margin-top: 10px;
   }
 
-  .btn-icon,
   .btn-text {
-    padding: 2px;
+    padding: 5px;
   }
 }
 
 /* xl */
-@media (min-width: 1280px) {
+@media (max-width: 1280px) {
   .container {
-    max-width: 1280px;
-  }
-
-  .nav-item {
-    position: relative;
-    left: 750px;
-  }
-
-  .user-profile {
-    margin-top: 5px;
-  }
-
-  #profile {
-    color: white;
-    background-color: black;
-  }
-
-  form {
-    width: 650px;
-    position: relative;
-    left: 270px;
-  }
-
-  .btn {
-    width: 380px;
-    margin-top: 20px;
-    position: relative;
-    left: 130px;
-  }
-
-  .btn-icon,
-  .btn-text {
-    padding: 2px;
+    max-width: 1024px;
   }
 }
 
-/* 2xl */
-@media (min-width: 1636px) {
+/* lg */
+@media (max-width: 1024px) {
   .container {
-    max-width: 1636px;
+    max-width: 768px;
   }
+}
 
-  h3 {
+/* md */
+@media (max-width: 768px) {
+  .container {
+    max-width: 640px;
   }
+}
 
-  h1 {
-    font-family: "Pacifico", cursive;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 45px;
-    color: green;
-    margin-top: 30px;
-    position: relative;
-    right: 10px;
+/* sm */
+@media (max-width: 640px) {
+  .container {
+    max-width: 475px;
   }
+}
 
-  .nav-item {
-    position: relative;
-    left: 875px;
-    font-size: 20px;
-    padding: 7px;
-  }
-
-  .full-form {
-    width: 800px;
-    position: relative;
-    left: 180px;
-  }
-
-  form {
-    padding: 40px;
-    padding-top: 50px;
-  }
-
-  .btn {
-    width: 380px;
-    margin-top: 20px;
-    position: relative;
-    left: 95px;
+/* xs */
+@media (max-width: 475px) {
+  .container {
+    width: 100%;
   }
 }
