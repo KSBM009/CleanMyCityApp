@@ -9,7 +9,7 @@
 /* 2xl */
 @media (max-width: 1536px) {
   .container {
-    max-width: 1380px;
+    max-width: 1536px;
   }
 
   /* Define animation */
@@ -23,8 +23,6 @@
   }
 
   body {
-    background-color: #eef7ff;
-    background-size: auto;
     animation: fadeIn 1s ease;
   }
 
@@ -36,11 +34,18 @@
     color: green;
     margin-top: 20px;
     position: relative;
-    right: 10px;
+    bottom: 5px;
+    left: 5px;
   }
   nav {
     margin-top: 10px;
-  }
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    padding: 40px;
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    /* background-image: linear-gradient(to bottom, rgba(221, 221, 221, 1), rgba(221, 221, 221, 0)); */
+}
 
   .btn {
     background-color: green;
@@ -59,6 +64,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("images/profile.jpg");
+    background-size: auto;
   }
 
   .main-details {
@@ -74,6 +81,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("images/profile.jpg");
+    background-size: auto;
   }
 
   .info-div {
@@ -92,13 +101,15 @@
   /* CONCLUSION-SECTION */
 
   #conclusion-section {
-    padding-top: 10px;
+    padding-top: px;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: black;
-    margin-top: 30px;
+    margin-top: 10px;
     border-radius: 10px;
+    background-image: url("images/profile.jpg");
+    background-size: auto;
   }
 }
 
