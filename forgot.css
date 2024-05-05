@@ -21,9 +21,18 @@
     font-family: "Poppins", sans-serif;
   }
 
+  /* nav {
+    margin-top: 10px; */
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    /* padding: 40px;
+    background-color: #dddddd;
+    border-radius: 10px;
+  } */
+
   body {
-    background-image: url("./Images/profile\ \(1\).jpg");
-    overflow: hidden;
+    background-image: url("images/profile.jpg");
+    background-size: auto;
   }
 
   .title {
@@ -51,19 +60,20 @@
     position: relative;
     right: 50px;
     width: 500px;
-    background: #fff;
+    background: lightgray;
     border-radius: 5px;
     box-shadow: 8px 5px 15px rgba(0, 0, 0, 0.2);
+    border: solid green;
   }
 
   .whole .title {
-    background: green;
+    /* background: green; */
     line-height: 80px;
     font-size: 29px;
     font-weight: 700;
     text-align: center;
     border-radius: 5px 5px 0 0;
-    color: #fff;
+    color: black;
     padding: 0;
     cursor: default;
     /* position: relative;
@@ -131,8 +141,9 @@
   }
 
   .whole form .botton input:hover {
-    background-color: #16a085;
-    border: 2px solid #1abc9c;
+    /* background-color: #16a085;
+    border: 2px solid #1abc9c; */
+    background-color: darkgreen;
   }
 
   .whole form .signup_link {

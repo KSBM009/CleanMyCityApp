@@ -9,12 +9,21 @@
 /* 2xl */
 @media (max-width: 1536px) {
   .container {
-    max-width: 1280px;
+    max-width: 1536px;
   }
   body {
     background-image: url("images/profile.jpg");
     background-size: auto;
   }
+
+  /* nav {
+    margin-top: 10px; */
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    /* padding: 40px;
+    background-color: #dddddd;
+    border-radius: 10px;
+  } */
 
   .title {
     font-family: "Pacifico", cursive;
@@ -30,7 +39,8 @@
   form {
     width: 500px;
     position: relative;
-    left: 340px;
+    top: 70px;
+    left: 385px;
     border: solid;
     border-color: green;
     border-radius: 10px;

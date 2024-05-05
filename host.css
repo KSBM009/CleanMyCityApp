@@ -49,6 +49,7 @@
 }
 
 form {
+  width: 500px;
   border: solid;
   border-radius: 10px;
   border-color: green;
@@ -198,8 +199,7 @@ form {
     max-width: 1636px;
   }
 
-  h3{
-    
+  h3 {
   }
 
   h1 {
