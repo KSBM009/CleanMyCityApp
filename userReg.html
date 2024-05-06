@@ -118,6 +118,16 @@
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required />
 
+    <button type="button" id="sendOTP">Confirm Email</button>
+    <div id="error-msg" class="error"></div>
+
+    <div id="otp-input">
+      <label for="otp">Enter OTP:</label>
+      <input type="text" id="otp" name="otp" required />
+      <button type="button" id="verifyOTP">Verify OTP</button>
+      <div id="otp-error-msg" class="error"></div>
+    </div>
+
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required />
 
@@ -194,7 +204,7 @@
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -214,6 +224,39 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const auth = getAuth(app);
+
+    // Send OTP
+    document.getElementById('sendOTP').addEventListener('click', () => {
+      var email = document.getElementById('email').value;
+      const actionCodeSettings = {
+        url: 'http://localhost:5500/userReg.html',
+        handleCodeInApp: true
+      };
+      sendEmailVerification(auth.currentUser, actionCodeSettings).then(() => {
+        document.getElementById('otp-input').style.display = 'block';
+        document.getElementById('sendOTP').style.display = 'none';
+        document.getElementById('submit').style.display = 'none';
+      }).catch((error) => {
+        console.error(error);
+      });
+    });
+
+    // Email OTP Verification
+    verifyOTP.addEventListener('click', (e) => {
+      var otp = document.getElementById('otp').value;
+      const user = auth.currentUser;
+
+      // Confirm the OTP
+      user.confirmEmailVerification(otp)
+      .then(() => {
+        // Email verification confirmed
+        alert('Email verified successfully!');
+      })
+      .catch((error) => {
+        console.error('Error confirming email verification', error);
+        document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
+      });
+    });
 
     submit.addEventListener('click', (e) => {
       var name = document.getElementById('name').value;
