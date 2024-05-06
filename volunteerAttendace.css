@@ -24,7 +24,7 @@
   body {
     animation: fadeIn 1s ease;
     background-image: url("images/background_img.jpg");
-    background-size: cover;
+    background-size: auto;
   }
 
   nav {
@@ -58,18 +58,15 @@
     left: 400px;
     border: solid green;
     border-radius: 10px;
-   
   }
 
-  table{
+  table {
     background-color: green;
   }
 
-  .custom-bg-color{
+  .custom-bg-color {
     background-color: #dddddd;
   }
-
-  
 }
 
 /* xl */
