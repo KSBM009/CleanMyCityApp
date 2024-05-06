@@ -47,21 +47,34 @@
     left: 5px;
   }
 
+ 
+
   .table-title {
     color: green;
     margin-top: 30px;
-  }
-  .table {
-    width: 50%;
-    margin-top: 50px;
-    position: relative;
-    left: 400px;
-    border: solid green;
     border-radius: 10px;
   }
+  .table {
+    /* width: 40%;
+    margin-top: 50px;
+    position: relative;
+    left: 40px;
+   border-style: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px; */
 
-  table {
-    background-color: green;
+    width: 40%;
+    margin-top: 50px;
+    position: relative;
+    left: 450px;
+    /* border: 0.5rem outset green; */
+    outline: 5px solid green;
+    box-shadow: 0 0 0 9px  green;
+    border-radius: 12px;
+    margin: 2rem;
+    /* padding: 1rem; */
+    /* outline-offset: 0.5rem; */
   }
 
   .custom-bg-color {
@@ -74,12 +87,58 @@
   .container {
     max-width: 1024px;
   }
+  .table {
+    /* width: 40%;
+    margin-top: 50px;
+    position: relative;
+    left: 40px;
+   border-style: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px; */
+
+    width: 50%;
+    margin-top: 50px;
+    position: relative;
+    left: 230px;
+    /* border: 0.5rem outset green; */
+    outline: 5px solid green;
+    box-shadow: 0 0 0 9px  green;
+    border-radius: 12px;
+    margin: 2rem;
+    /* padding: 1rem; */
+    /* outline-offset: 0.5rem; */
+  }
+
 }
 
 /* lg */
 @media (max-width: 1024px) {
   .container {
     max-width: 768px;
+  }
+
+  .table {
+    /* width: 40%;
+    margin-top: 50px;
+    position: relative;
+    left: 40px;
+   border-style: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px; */
+
+    width: 50%;
+    margin-top: 50px;
+    position: relative;
+    left: 156px;
+    /* border: 0.5rem outset green; */
+    outline: 5px solid green;
+    box-shadow: 0 0 0 9px  green;
+    border-radius: 12px;
+    margin: 2rem;
+    /* padding: 1rem; */
+    /* outline-offset: 0.5rem; */
   }
 }
 
@@ -88,6 +147,29 @@
   .container {
     max-width: 640px;
   }
+
+  .table {
+    /* width: 40%;
+    margin-top: 50px;
+    position: relative;
+    left: 40px;
+   border-style: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px; */
+
+    width: 60%;
+    margin-top: 50px;
+    position: relative;
+    left: 90px;
+    /* border: 0.5rem outset green; */
+    outline: 5px solid green;
+    box-shadow: 0 0 0 9px  green;
+    border-radius: 12px;
+    margin: 2rem;
+    /* padding: 1rem; */
+    /* outline-offset: 0.5rem; */
+  }
 }
 
 /* sm */
@@ -95,11 +177,56 @@
   .container {
     max-width: 475px;
   }
+  .table {
+    /* width: 40%;
+    margin-top: 50px;
+    position: relative;
+    left: 40px;
+   border-style: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px; */
+
+    width: 80%;
+    margin-top: 50px;
+    position: relative;
+    left: 10px;
+    /* border: 0.5rem outset green; */
+    outline: 5px solid green;
+    box-shadow: 0 0 0 9px  green;
+    border-radius: 12px;
+    margin: 2rem;
+    /* padding: 1rem; */
+    /* outline-offset: 0.5rem; */
+  }
+
 }
 
 /* xs */
 @media (max-width: 475px) {
   .container {
     width: 100%;
+  }
+
+  .table {
+    /* width: 40%;
+    margin-top: 50px;
+    position: relative;
+    left: 40px;
+   border-style: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px; */
+
+    width: 80%;
+    margin-top: 50px;
+    position: relative;
+    /* border: 0.5rem outset green; */
+    outline: 5px solid green;
+    box-shadow: 0 0 0 9px  green;
+    border-radius: 12px;
+    margin: 2rem;
+    /* padding: 1rem; */
+    /* outline-offset: 0.5rem; */
   }
 }
