@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <link rel="icon" href=".\images\favicon.ico">
   <meta charset="utf-8">
@@ -10,38 +9,27 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href=".\userReg.css">
 
-
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/0c4e367752.js" crossorigin="anonymous"></script>
 
   <!-- GOOGLE FONTS -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
-
 <body>
-
-
   <!-- nav section -->
-
-
   <div class="container">
     <nav class="navbar navbar-expand-lg bg-custom-color">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <h1>Clean My City <i class="fa-solid fa-leaf"></i></h1>
         </a>
-
       </div>
     </nav>
 
     <!-- FORM SECTION -->
-
-
     <div class="full-form">
-
       <form id="form">
         <h3>Sign Up</h3>
         <div class="mb-3">
@@ -60,11 +48,9 @@
           <label for="password" class="form-label">Password</label>
           <div class="passowrd-container">
             <input type="password" class="form-control" id="inputPassword" required>
-
           </div>
           <span id="password-span"></span>
         </div>
-
 
         <div class="mb-3">
           <label for="confirmPassword" class="form-label">Confirm Password</label>
@@ -105,22 +91,14 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
-
-</html>
-
 <!-- JAVASCRIPT -->
-
 <script>
   var sBtn = document.getElementById("submit-button");
-
   function validation() {
-
     // USER NAME
-
     var userName = document.getElementById("inputUser-name").value;
     var userNameBox = document.getElementById("inputUser-name")
     var userNameSpan = document.getElementById("username-span");
-
 
     if (userName.length === 0) {
       userNameSpan.textContent = "invalid";
@@ -128,7 +106,6 @@
     }
 
     //  EMAIL VALIDATION
-
     var form = document.getElementById("form");
     var email = document.getElementById("inputEmail").value;
     var emailBox = document.getElementById("inputEmail");
@@ -141,8 +118,6 @@
       emailSpan.innerHTML = "";
       emailSpan.style.border = "none";
       emailBox.style.borderColor = "";
-
-
     } else {
       form.classList.remove("valid");
       form.classList.add("invalid");
@@ -152,7 +127,6 @@
     }
 
     //  PASSOWORD
-
     var password = document.getElementById("inputPassword").value;
     var passwordBox = document.getElementById("inputPassword");
     var passwordSpan = document.getElementById("password-span");
@@ -173,7 +147,6 @@
     }
 
     // CONFIRM PASSOWORD
-
     var confirmPassword = document.getElementById("input-confirmPassword").value;
     var confirmPasswordBox = document.getElementById("input-confirmPassword");
     var confirmPasswordSpan = document.getElementById("confirmPassword-span");
@@ -188,11 +161,7 @@
       confirmPasswordBox.style.borderColor = "red";
     }
 
-
-
-
     // PHONE VALIDATION
-
     var phoneNumber = document.getElementById("input-phoneNumber").value;
     var phoneNumberBox = document.getElementById("input-phoneNumber")
     var phoneNumberSpan = document.getElementById("phoneNumber-span")
@@ -200,14 +169,8 @@
       phoneNumberSpan.innerHTML = "invalid"
       phoneNumberSpan.style.color = "red";
       phoneNumberBox.style.borderColor = "red";
-
-
     }
-
   }
-
   sBtn.addEventListener("click", validation);
-
-
-
 </script>
+</html>
