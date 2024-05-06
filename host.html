@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <link rel="icon" href=".\images\favicon.ico">
   <meta charset="utf-8">
@@ -9,18 +10,25 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href=".\host.css">
 
+
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/0c4e367752.js" crossorigin="anonymous"></script>
 
   <!-- GOOGLE FONTS -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
+
+
   <!-- nav section -->
+
+
   <div class="container">
+
     <nav class="navbar navbar-expand-lg bg-custom-color">
       <div class="container-fluid">
         <h1 class="animate__animated animate__fadeInDown">Clean My City <i class="fa-solid fa-leaf"></i></h1>
@@ -36,15 +44,20 @@
             <li class="nav-item">
               <a class="nav-link" href="events.html">Events</a>
             </li>
+
+
             <!-- <li class="nav-item">
                       <a class="nav-link" href="">About Us </a>
                   </li> -->
+
           </ul>
         </div>
       </div>
     </nav>
 
     <!-- FORM SECTION -->
+
+
     <div class="full-form">
 
       <form id="form">
@@ -104,8 +117,12 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
+
+
 <!-- JAVASCRIPT -->
+
 <script>
+
   // DATE VALIDATION
   var now = new Date();
   now.setDate(now.getDate() + 4); // Add 1 to get the next day
@@ -120,8 +137,10 @@
   document.getElementById('input-eventDate').min = currentDateTime;
 
   // VALIDATION
+
   var btn = document.getElementById('submit-button');
-  function validation(){
+
+  function validation() {
 
     // EVENT TITLE VALIDATION
     var eventTitle = document.getElementById('input-eventTitle').value;
@@ -138,6 +157,7 @@
     }
 
     // EVENT DESCRIPTION VALIDATION
+
     var eventDescription = document.getElementById('input-eventDescription').value;
     var eventDescriptionBox = document.getElementById('input-eventDescription');
     var eventDescriptionSpan = document.getElementById('eventDescription-span');
@@ -152,6 +172,7 @@
     }
 
     // EVENT CATEGORY VALIDATION
+
     var eventCategory = document.getElementById('input-eventCategory').value;
     var eventCategoryBox = document.getElementById('input-eventCategory');
     var eventCategorySpan = document.getElementById('eventCategory-span');
@@ -166,6 +187,7 @@
     }
 
     // EVENT LOCATION VALIDATION
+
     var eventLocation = document.getElementById('input-EventLocation').value;
     var eventLocationBox = document.getElementById('input-EventLocation');
     var eventLocationSpan = document.getElementById('EventLocation-span');
@@ -180,6 +202,7 @@
     }
 
     // EVENT DATE VALIDATION
+
     var eventDate = document.getElementById('input-eventDate').value;
     var eventDateBox = document.getElementById('input-eventDate');
     var eventDateSpan = document.getElementById('eventDate-span');
@@ -192,6 +215,8 @@
       eventDateSpan.textContent = "";
       eventDateSpan.style.color = "";
     }
+
+
 
     // VOLUNTEER PARTICIPATION VALIDATION
     var volunteerRequired = document.getElementById('input-volunteerRequired').value;
@@ -206,13 +231,15 @@
       volunteerRequiredSpan.textContent = "";
       volunteerRequiredSpan.style.color = "";
     }
+
+
+
   }
+
   btn.addEventListener("click", validation);
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 34489be0c8ff604b107c1079933d9aa8605b8aae
 </script>
+
 </html>
