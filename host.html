@@ -117,12 +117,8 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
-
-
 <!-- JAVASCRIPT -->
-
 <script>
-
   // DATE VALIDATION
   var now = new Date();
   now.setDate(now.getDate() + 1); // Add 1 to get the next day
@@ -137,10 +133,8 @@
   document.getElementById('input-eventDate').min = currentDateTime;
 
   // VALIDATION
-
   var btn = document.getElementById('submit-button');
-
-  function validation() {
+  function validation(){
 
     // EVENT TITLE VALIDATION
     var eventTitle = document.getElementById('input-eventTitle').value;
@@ -157,7 +151,6 @@
     }
 
     // EVENT DESCRIPTION VALIDATION
-
     var eventDescription = document.getElementById('input-eventDescription').value;
     var eventDescriptionBox = document.getElementById('input-eventDescription');
     var eventDescriptionSpan = document.getElementById('eventDescription-span');
@@ -172,7 +165,6 @@
     }
 
     // EVENT CATEGORY VALIDATION
-
     var eventCategory = document.getElementById('input-eventCategory').value;
     var eventCategoryBox = document.getElementById('input-eventCategory');
     var eventCategorySpan = document.getElementById('eventCategory-span');
@@ -187,7 +179,6 @@
     }
 
     // EVENT LOCATION VALIDATION
-
     var eventLocation = document.getElementById('input-EventLocation').value;
     var eventLocationBox = document.getElementById('input-EventLocation');
     var eventLocationSpan = document.getElementById('EventLocation-span');
@@ -202,7 +193,6 @@
     }
 
     // EVENT DATE VALIDATION
-
     var eventDate = document.getElementById('input-eventDate').value;
     var eventDateBox = document.getElementById('input-eventDate');
     var eventDateSpan = document.getElementById('eventDate-span');
@@ -215,8 +205,6 @@
       eventDateSpan.textContent = "";
       eventDateSpan.style.color = "";
     }
-
-
 
     // VOLUNTEER PARTICIPATION VALIDATION
     var volunteerRequired = document.getElementById('input-volunteerRequired').value;
@@ -231,21 +219,7 @@
       volunteerRequiredSpan.textContent = "";
       volunteerRequiredSpan.style.color = "";
     }
-
-
-
   }
-
   btn.addEventListener("click", validation);
-
-  // VOLUNTEER VALDIATION
-
-
-
-
-
-
-
 </script>
-
 </html>
