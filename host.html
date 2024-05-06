@@ -125,7 +125,7 @@
 
   // DATE VALIDATION
   var now = new Date();
-  now.setDate(now.getDate() + 1); // Add 1 to get the next day
+  now.setDate(now.getDate() + 4); // Add 1 to get the next day
   var year = now.getFullYear();
   var month = ('0' + (now.getMonth() + 1)).slice(-2); // Adding 1 because months are 0-indexed
   var day = ('0' + now.getDate()).slice(-2);
@@ -237,12 +237,6 @@
   }
 
   btn.addEventListener("click", validation);
-
-  // VOLUNTEER VALDIATION
-
-
-
-
 
 
 
