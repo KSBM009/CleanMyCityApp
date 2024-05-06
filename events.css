@@ -13,7 +13,7 @@
   }
 
   body {
-    background-image: url("images/profile.jpg");
+    background-image: url("images/background_img.jpg");
     background-size: auto;
   }
 
@@ -53,21 +53,20 @@
     padding-right: 10px;
     color: black;
   }
-  h4{
+  h4 {
     color: black;
   }
 
-  a{
+  a {
     color: black;
   }
 
   /* MAIN-SECTION */
 
   #main-section {
-   margin-top: 50px;
+    margin-top: 50px;
     display: flex;
     justify-content: space-around;
-
   }
 
   .card {
@@ -83,11 +82,9 @@
     background-color: lightgrey;
 } */
 
-
   /* #evntDate {
     background-color: lightgray;
 } */
-
 }
 
 /* xl */

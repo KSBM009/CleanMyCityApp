@@ -13,7 +13,7 @@
   }
 
   body {
-    background-image: url("images/profile.jpg");
+    background-image: url("images/background_img.jpg");
     background-size: cover;
   }
 
@@ -38,7 +38,6 @@
     padding: 10px;
     background-color: lightgrey;
     margin-top: 50px;
-
   }
 
   .btn {

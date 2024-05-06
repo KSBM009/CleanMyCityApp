@@ -23,15 +23,15 @@
 
   /* nav {
     margin-top: 10px; */
-    /* margin-left: 20px;
+  /* margin-left: 20px;
     margin-right: 20px; */
-    /* padding: 40px;
+  /* padding: 40px;
     background-color: #dddddd;
     border-radius: 10px;
   } */
 
   body {
-    background-image: url("images/profile.jpg");
+    background-image: url("images/background_img.jpg");
     background-size: auto;
   }
 
