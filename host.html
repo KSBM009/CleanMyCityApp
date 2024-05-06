@@ -58,8 +58,9 @@
         </div>
 
         <div class="mb-3">
-          <label for="EventDescription" class="form-label" id="Event-Description">Event Description</label>
-          <input type="text" class="form-control" id="input-eventDescription" required>
+          <label for="EventDescription" class="form-label" id="Event-Description">Event Description</label><br>
+          <!-- <input type="text" class="form-control" id="input-eventDescription" required> -->
+          <textarea name="" class="form-control" id="input-eventDescription" required cols="62"></textarea>
           <span id="eventDescription-span"></span>
         </div>
 
@@ -83,17 +84,17 @@
 
         <div class="mb-3">
           <label for="volunteerRequrired" class="form-label">volunteer Requrired</label>
-          <input type="number" class="form-control" id="input-volunteerRequired" required min="2">
+          <input type="number" class="form-control" id="input-volunteerRequired" required min="5">
           <span id="volunteerRequired-span"></span>
         </div>
 
         <button id="submit-button" type="submit" class="btn btn-success">Submit</button>
-        <button id="goolge-button" type="submit" class="btn btn-primary">
+        <!-- <button id="goolge-button" type="submit" class="btn btn-primary">
           <span class="btn-icon">
             <i class="fa-brands fa-google"></i>
           </span>
           <span class="btn-text">Sign Up with Google</span>
-        </button>
+        </button> -->
       </form>
     </div>
   </div>
@@ -105,15 +106,15 @@
 <script>
   // DATE VALIDATION
   var now = new Date();
-  now.setDate(now.getDate() + 4); // Add 1 to get the next day
+  now.setDate(now.getDate() + 4);
   var year = now.getFullYear();
-  var month = ('0' + (now.getMonth() + 1)).slice(-2); // Adding 1 because months are 0-indexed
+  var month = ('0' + (now.getMonth() + 1)).slice(-2);
   var day = ('0' + now.getDate()).slice(-2);
   var hour = ('0' + now.getHours()).slice(-2);
   var minute = ('0' + now.getMinutes()).slice(-2);
   var currentDateTime = year + '-' + month + '-' + day + 'T' + hour + ':' + minute;
 
-  // Set the minimum date and time for the input field
+
   document.getElementById('input-eventDate').min = currentDateTime;
 
   // VALIDATION
@@ -194,11 +195,11 @@
     var volunteerRequiredBox = document.getElementById('input-volunteerRequired');
     var volunteerRequiredSpan = document.getElementById('volunteerRequired-span');
 
-    if (volunteerRequired < 7) {
-      volunteerRequiredSpan.textContent = "minimum 7 volunteers required";
+    if (volunteerRequired < 5) {
+      volunteerRequiredSpan.textContent = "minimum 5 volunteers required";
       volunteerRequiredSpan.style.color = "red";
     }
-    if (volunteerRequired > 7) {
+    if (volunteerRequired >= 5) {
       volunteerRequiredSpan.textContent = "";
       volunteerRequiredSpan.style.color = "";
     }

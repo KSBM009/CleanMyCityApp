@@ -9,12 +9,21 @@
 /* 2xl */
 @media (max-width: 1536px) {
   .container {
-    max-width: 1280px;
+    max-width: 1536px;
   }
 
   body {
     background-image: url("images/background_img.jpg");
     background-size: cover;
+  }
+
+  nav {
+    max-width: 1536px;
+    background-color: lightgrey;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 40px;
+    background-color: #dddddd;
   }
 
   h1 {
@@ -25,13 +34,14 @@
     color: green;
     margin-top: 20px;
     position: relative;
-    right: 10px;
+    bottom: 5px;
+    left: 5px;
   }
 
   form {
     width: 500px;
     position: relative;
-    left: 364px;
+    left: 480px;
     border: solid;
     border-color: green;
     border-radius: 10px;

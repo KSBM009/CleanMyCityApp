@@ -48,6 +48,11 @@
     padding: 10px;
     background-color: lightgrey;
     margin-top: 50px;
+    margin-bottom: 30px;
+  }
+
+  #input-eventDescription{
+    height: 100px;
   }
 
   .btn {
