@@ -152,59 +152,11 @@
     Already have an exisiting account? <a href="login.html">Log In</a>
   </p>
 
-  <!-- <script>
-        function submitForm() {
-            // Get form data
-            const formData = new FormData(document.getElementById('apiForm'));
-
-            // Convert form data to URL-encoded string
-            const urlSearchParams = new URLSearchParams(formData);
-            const queryString = urlSearchParams.toString();
-
-            // Replace this URL with your API endpoint
-            const apiUrl = 'http://localhost:4000/reg'; // replace with your API endpoint
-
-            // Send data to the API using a GET request with query parameters
-            fetch(`${apiUrl}?${queryString}`)
-                .then(response => {
-                    console.log(response)
-                    if (!response.ok) {
-                        throw new Error(response.data.msg);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Redirect to a new page with API call to fetch the list
-                    const redirectUrl = `regRes.html?${queryString}`;
-                    window.location.href = redirectUrl;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    // Display error message
-                    document.getElementById('error-msg').textContent = 'Error in inserting data. Please try again.';
-                });
-        }
-    </script> -->
-  <!--<div class="rules-section">
-        <h3>How to run the backend of this project: </h3>
-        <div class="rule">
-            <strong>1:</strong> Enter into backend folder in the project using command "cd backend".
-        </div>
-        <div class="rule">
-            <strong>2:</strong> After entering into backend folder type command "npm install" only this command is needed for this project to run, all other pakages are configed.
-        </div>
-        <div class="rule">
-            <strong>3:</strong> Replace the database URL with your URL.
-        </div>
-        <div class="rule">
-            <strong>4:</strong> If any error in running the backend code just ping me on whatsapp.
-        </div>
-    </div>-->
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -284,6 +236,9 @@
     });
 
     // Google Sign-Up function
+    auth.languageCode = 'it';
+    // To apply the default browser preference instead of explicitly setting it.
+    // auth.useDeviceLanguage();
     const googleSignIn = async () => {
       const provider = new firebase.auth.GoogleAuthProvider(app);
       try {
