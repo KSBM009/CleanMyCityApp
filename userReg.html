@@ -105,6 +105,15 @@
     .button-text {
       /* The text styles are inherited from .custom-button */
     }
+
+    #otp-input {
+      display: none;
+    }
+
+    #email-verified {
+      display: none;
+      color: green;
+    }
   </style>
 </head>
 
@@ -117,6 +126,7 @@
 
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required />
+    <span id="email-verified">✓</span>
 
     <button type="button" id="sendOTP">Confirm Email</button>
     <div id="error-msg" class="error"></div>
@@ -149,14 +159,14 @@
   </div>
 
   <p style="text-align: center">
-    Already have an exisiting account? <a href="login.html">Log In</a>
+    Already have an existing account? <a href="login.html">Log In</a>
   </p>
 
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, applyActionCode, checkActionCode, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -194,23 +204,36 @@
     });
 
     // Email OTP Verification
-    verifyOTP.addEventListener('click', (e) => {
+    document.getElementById('verifyOTP').addEventListener('click', (e) => {
       var otp = document.getElementById('otp').value;
-      const user = auth.currentUser;
+      var email = document.getElementById('email').value;
 
-      // Confirm the OTP
-      user.confirmEmailVerification(otp)
-      .then(() => {
-        // Email verification confirmed
-        alert('Email verified successfully!');
+      checkActionCode(auth, otp)
+      .then((info) => {
+        const newEmail = info.data().email;
+        if (newEmail === email) {
+          applyActionCode(auth, otp)
+          .then(() => {
+            // Email verification confirmed
+            alert('Email verified successfully!');
+            document.getElementById('otp-input').style.display = 'none';
+            document.getElementById('email-verified').style.display = 'inline';
+          })
+          .catch((error) => {
+            console.error('Error confirming email verification', error);
+            document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
+          });
+        } else {
+          document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
+        }
       })
       .catch((error) => {
-        console.error('Error confirming email verification', error);
+        console.error('Error checking action code', error);
         document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
       });
     });
 
-    submit.addEventListener('click', (e) => {
+    document.getElementById('submit').addEventListener('click', () => {
       var name = document.getElementById('name').value;
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
@@ -230,7 +253,7 @@
           const errorCode = error.code;
           const errorMessage = error.message;
 
-          alert('error: ' + errorMessage);
+          alert('Error: ' + errorMessage);
           // ..
         });
     });
