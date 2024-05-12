@@ -1,0 +1,203 @@
+.container {
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+/* 2xl */
+@media (max-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+
+  body {
+    background-image: url("images/background_img.jpg");
+    background-size: cover;
+  }
+
+  nav {
+    max-width: 1536px;
+    background-color: lightgrey;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 40px;
+    background-color: #dddddd;
+  }
+
+  h1 {
+    font-family: "Pacifico", cursive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 35px;
+    color: green;
+    margin-top: 20px;
+    position: relative;
+    bottom: 5px;
+    left: 5px;
+  }
+
+  form {
+    width: 500px;
+    position: relative;
+    left: 480px;
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: lightgrey;
+    margin-top: 50px;
+  }
+
+  .btn {
+    width: 250px;
+    position: relative;
+    left: 120px;
+    margin-top: 10px;
+  }
+
+  .btn-text {
+    padding: 5px;
+  }
+}
+
+/* xl */
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1024px;
+  }
+
+  form {
+    width: 500px;
+    position: relative;
+    left: 250px;
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .btn {
+    width: 250px;
+    position: relative;
+    left: 120px;
+    margin-top: 10px;
+  }
+
+  .btn-text {
+    padding: 5px;
+  }
+}
+
+/* lg */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 768px;
+  }
+
+  form {
+    width: 400px;
+    position: relative;
+    left: 170px;
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .btn {
+    width: 250px;
+    position: relative;
+    left: 60px;
+    margin-top: 10px;
+  }
+
+  .btn-text {
+    padding: 5px;
+  }
+}
+
+/* md */
+@media (max-width: 768px) {
+  .container {
+    max-width: 640px;
+  }
+
+  form {
+    width: 400px;
+    position: relative;
+    left: 110px;
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .btn {
+    width: 250px;
+    position: relative;
+    left: 60px;
+    margin-top: 10px;
+  }
+
+  .btn-text {
+    padding: 5px;
+  }
+}
+
+/* sm */
+@media (max-width: 640px) {
+  .container {
+    max-width: 475px;
+  }
+
+  form {
+    width: 400px;
+    position: relative;
+    left: 30px;
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .btn {
+    width: 250px;
+    position: relative;
+    left: 60px;
+    margin-top: 10px;
+  }
+
+  .btn-text {
+    padding: 5px;
+  }
+}
+
+/* xs */
+@media (max-width: 475px) {
+  .container {
+    width: 100%;
+  }
+
+  form {
+    width: 350px;
+    position: relative;
+
+    border: solid;
+    border-color: green;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .btn {
+    width: 250px;
+    position: relative;
+    left: 60px;
+    margin-top: 10px;
+  }
+
+  .btn-text {
+    padding: 5px;
+  }
+}
