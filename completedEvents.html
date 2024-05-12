@@ -39,45 +39,96 @@
         </nav>
     </div>
 
-    <!-- FILTER SECTION -->
-    <section id="filter">
-        <div class="filter-div">
-            <div class="filter-items">
-                <a href=".\events.html">
-                    <h4>Live |</h4>
-                </a>
-            </div>
-            <div class="filter-items">
-                <a href=".\completedEvents.html">
-                    <h4>Completed </h4>
-                </a>
-            </div>
-            <!-- <div class="filter-items">
-                <h4>Upcoming</h4>
-            </div> -->
-        </div>
-    </section>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <section id="main-section">
-        <div class="card" style="width: 18rem;">
-            <img id="eventImage" src=".\images\completedEvents_img.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Park cleaning</h5>
-            </div>
-            <form class="event-form">
-                <div class="mb-3">
-                    <label for="" class="form-label">Date</label>
-                    <input type="Date" class="form-control input" id="evntDate">
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="eventLocation">
-                </div>
-            </form>
-            <div class="card-body">
-                <button class="btn btn-success">View</button>
-            </div>
-        </div>
-    </section>
-</body>
+    <script>
+      // JavaScript Functionality for Completed Events Page
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const completedEventContainer = document.getElementById(
+          "completedEventContainer"
+        );
+
+        // Simulated completed events data
+        const completedEvents = [
+          {
+            beforeImage: "path/to/before-image1.jpg",
+            afterImage: "path/to/after-image1.jpg",
+            location: "City Park",
+            dateTime: "2024-04-15T10:00:00",
+            details: "A successful cleaning event at City Park.",
+          },
+          {
+            beforeImage: "path/to/before-image2.jpg",
+            afterImage: "path/to/after-image2.jpg",
+            location: "Community Center",
+            dateTime: "2024-04-20T14:30:00",
+            details: "Community cleanup initiative at the local center.",
+          },
+          // Add more event data as needed
+        ];
+
+        renderCompletedEvents(completedEvents);
+
+        function renderCompletedEvents(events) {
+          completedEventContainer.innerHTML = ""; // Clear previous content
+
+          events.forEach((event) => {
+            const eventCard = createCompletedEventCard(event);
+            completedEventContainer.appendChild(eventCard);
+          });
+        }
+
+        function createCompletedEventCard(event) {
+          const eventCard = document.createElement("div");
+          eventCard.classList.add("completed-event-card");
+
+          // Create top section for before/after images
+          const imagesContainer = document.createElement("div");
+
+          const beforeImage = document.createElement("img");
+          beforeImage.src = event.beforeImage;
+          beforeImage.alt = "Before Cleaning Image";
+          beforeImage.classList.add("mb-3"); // Add margin-bottom to the image
+          imagesContainer.appendChild(beforeImage);
+
+          const afterImage = document.createElement("img");
+          afterImage.src = event.afterImage;
+          afterImage.alt = "After Cleaning Image";
+          imagesContainer.appendChild(afterImage);
+
+          // Create bottom section for event details and button
+          const eventDetails = document.createElement("div");
+          eventDetails.classList.add("event-details");
+
+          const dateTimePara = document.createElement("p");
+          const dateTime = new Date(event.dateTime).toLocaleString();
+          dateTimePara.textContent = `Date & Time: ${dateTime}`;
+          eventDetails.appendChild(dateTimePara);
+
+          const locationPara = document.createElement("p");
+          locationPara.textContent = `Location: ${event.location}`;
+          eventDetails.appendChild(locationPara);
+
+          const detailsPara = document.createElement("p");
+          detailsPara.textContent = event.details;
+          eventDetails.appendChild(detailsPara);
+
+          const viewDetailsBtn = document.createElement("button");
+          viewDetailsBtn.textContent = "View Details";
+          viewDetailsBtn.classList.add("view-details-btn");
+          eventDetails.appendChild(viewDetailsBtn);
+
+          // Append sections to the event card
+          eventCard.appendChild(imagesContainer);
+          eventCard.appendChild(eventDetails);
+
+          return eventCard;
+        }
+      });
+    </script>
+  </body>
 </html>
