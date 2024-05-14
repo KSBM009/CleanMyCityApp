@@ -65,20 +65,20 @@
 
   .full-form{
     display: flex;
-    justify-content: space-around;
-    gap: 25px;
+    flex-direction: column;
+    align-items: center;
   }
 
   #input-eventDescription {
     height: 100px;
   }
 
-  /* .btn {
-    width: 250px;
+  .btn {
+    width: 100px;
     position: relative;
-    left: 120px;
+    left: 220px;
     margin-top: 10px;
-  } */
+  }
 /* 
   .btn-text {
     padding: 5px;
