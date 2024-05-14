@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href=".\images\favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feedback-Clean My City</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href=".\feedback.css">
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/0c4e367752.js" crossorigin="anonymous"></script>
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- nav section -->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-custom-color">
+            <div class="container-fluid">
+                <h1 class="animate__animated animate__fadeInDown">Clean My City <i class="fa-solid fa-leaf"></i></h1>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="events.html">Events</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                      <a class="nav-link" href="">Host</a>
+                  </li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- FORM SECTION -->
+        <div class="full-form">
+            <form id="form">
+                <h3>Feedback</h3>
+                <div class="mb-3">
+                    <label for="user-name" class="form-label" id="user-name">User name</label>
+                    <input type="text" class="form-control" id="inputUser-name" required>
+                    <span id="username-span"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label" id="email">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" required>
+                    <span id="email-span"></span>
+                </div>
+
+                <!-- <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <div class="passowrd-container">
+            <input type="password" class="form-control" id="inputPassword" required>
+          </div>
+          <span id="password-span"></span>
+        </div> -->
+
+                <!-- <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="input-confirmPassword" required>
+          <span id="confirmPassword-span"></span>
+        </div> -->
+                <div class="mb-3">
+                    <label for="phoneNumber" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="input-phoneNumber" maxlength="10" minlength="10"
+                        required>
+                    <span id="phoneNumber-span"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="EventDescription" class="form-label" id="Event-Description">Tell us about your
+                        Experience</label><br>
+                    <!-- <input type="text" class="form-control" id="input-eventDescription" required> -->
+                    <textarea name="" class="form-control" id="input-eventDescription" required cols="62"></textarea>
+                    <span id="eventDescription-span"></span>
+                </div>
+
+
+
+                <div id="rating-div" class="mb-3">
+                    <label for="rating" class="form-label">Rate your overall experience</label>
+                    <br>
+                    <button type="button" class="btn btn-outline-success">1</button>
+                    <button type="button" class="btn btn-outline-success">2</button>
+                    <button type="button" class="btn btn-outline-success">3</button>
+                    <button type="button" class="btn btn-outline-success">4</button>
+                    <button type="button" class="btn btn-outline-success">5</button>
+                    <span id="rating-span"></span>
+                </div>
+
+                <button id="submit-button" type="submit" class="btn btn-success">Submit</button>
+                <!-- <button id="goolge-button" type="submit" class="btn btn-primary">
+          <span class="btn-icon">
+            <i class="fa-brands fa-google"></i>
+          </span>
+          <span class="btn-text">Sign Up with Google</span>
+
+        </button> -->
+                <!-- <p style="text-align: center">
+          Already have an account <a href="login.html">Sign In</a>
+        </p> -->
+
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+<!-- JAVASCRIPT -->
+<script>
+    var sBtn = document.getElementById("submit-button");
+    function validation() {
+        // USER NAME
+        var userName = document.getElementById("inputUser-name").value;
+        var userNameBox = document.getElementById("inputUser-name")
+        var userNameSpan = document.getElementById("username-span");
+
+        if (userName.length === 0) {
+            userNameSpan.textContent = "invalid";
+            userNameSpan.style.color = "red";
+        }
+
+        //  EMAIL VALIDATION
+        var form = document.getElementById("form");
+        var email = document.getElementById("inputEmail").value;
+        var emailBox = document.getElementById("inputEmail");
+        var emailSpan = document.getElementById("email-span");
+        var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+        if (email.match(pattern)) {
+            form.classList.add("valid");
+            form.classList.remove("invalid");
+            emailSpan.innerHTML = "";
+            emailSpan.style.border = "none";
+            emailBox.style.borderColor = "";
+        } else {
+            form.classList.remove("valid");
+            form.classList.add("invalid");
+            emailSpan.innerHTML = "email is invalid";
+            emailSpan.style.color = "red";
+            emailBox.style.borderColor = "red";
+        }
+
+        //  PASSOWORD
+        // var password = document.getElementById("inputPassword").value;
+        // var passwordBox = document.getElementById("inputPassword");
+        // var passwordSpan = document.getElementById("password-span");
+
+        // var hasUpperCase = /[A-Z]/.test(password);
+        // var hasLowerCase = /[a-z]/.test(password);
+        // var hasNumbers = /\d/.test(password);
+        // var hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        // var isValid = hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChars;
+
+        // if (!isValid) {
+        //     passwordSpan.textContent = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+        //     passwordSpan.style.color = "red";
+        //     passwordBox.style.borderColor = "red";
+        // } else {
+        //     passwordBox.style.border = "none";
+        //     passwordSpan.textContent = ""
+        // }
+
+        // CONFIRM PASSOWORD
+        // var confirmPassword = document.getElementById("input-confirmPassword").value;
+        // var confirmPasswordBox = document.getElementById("input-confirmPassword");
+        // var confirmPasswordSpan = document.getElementById("confirmPassword-span");
+
+        // if (password === confirmPassword) {
+        //     confirmPasswordSpan.textContent = ""
+        //     confirmPasswordBox.style.border = "none";
+        // }
+        // else {
+        //     confirmPasswordSpan.textContent = "password does not match"
+        //     confirmPasswordSpan.style.color = "red";
+        //     confirmPasswordBox.style.borderColor = "red";
+        // }
+
+        // PHONE VALIDATION
+        var phoneNumber = document.getElementById("input-phoneNumber").value;
+        var phoneNumberBox = document.getElementById("input-phoneNumber")
+        var phoneNumberSpan = document.getElementById("phoneNumber-span")
+        if (phoneNumber.length < 10 || phoneNumber.length > 10) {
+            phoneNumberSpan.innerHTML = "invalid"
+            phoneNumberSpan.style.color = "red";
+            phoneNumberBox.style.borderColor = "red";
+        }
+    }
+    sBtn.addEventListener("click", validation);
+</script>
+
+</html>
