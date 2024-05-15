@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <!-- nav section -->
   <div class="container">
@@ -92,7 +94,7 @@
           </span>
           <span class="btn-text">Sign Up with Google</span>
         </button> -->
-        
+
         <p style="text-align: center">
           Already have an existing account? <a href="login.html">Log In</a>
         </p>
@@ -189,7 +191,7 @@
           console.log(user);
           alert('User Created!');
           window.location.href = 'login.html'; // Redirect to login page on successful Registration
-          
+
           // // Save user information to the database
           // const dbRef = ref(db, 'users/' + user.uid);
           // set(dbRef, {
@@ -304,14 +306,26 @@
 
     // PHONE VALIDATION
     var phoneNumber = document.getElementById("input-phoneNumber").value;
-    var phoneNumberBox = document.getElementById("input-phoneNumber")
-    var phoneNumberSpan = document.getElementById("phoneNumber-span")
-    if (phoneNumber.length < 10 || phoneNumber.length > 10) {
-      phoneNumberSpan.innerHTML = "invalid"
+    var phoneNumberBox = document.getElementById("input-phoneNumber");
+    var phoneNumberSpan = document.getElementById("phoneNumber-span");
+
+
+    var numericRegex = /^[0-9]+$/;
+
+    if (!numericRegex.test(phoneNumber) || phoneNumber.length !== 10) {
+      phoneNumberSpan.innerHTML = "invalid";
       phoneNumberSpan.style.color = "red";
       phoneNumberBox.style.borderColor = "red";
+    } else {
+
+      phoneNumberSpan.innerHTML = "";
+      phoneNumberSpan.style.color = "";
+      phoneNumberBox.style.borderColor = "";
     }
+
+
   }
   sBtn.addEventListener("click", validation);
 </script>
+
 </html>
