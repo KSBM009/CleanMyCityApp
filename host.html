@@ -118,8 +118,11 @@
       var description = document.getElementById('Event-Description').value;
       var category = document.getElementById('Event-Category').value;
       var location = document.getElementById('Event-Location').value;
-      var date = document.getElementById('Event-Date').value;
+      var hostDateTime = document.getElementById('Event-Date').value;
       var volunteersRequired = document.getElementById('Volunteers-Required').value;
+
+      //Admin Approval is default no
+      var adminApproval = 'no';
 
       const eventRef = ref(db, 'events');
       const newEventRef = push(eventRef);
@@ -129,13 +132,13 @@
         eventId: eventId,
         title: title,
         description: description,
-        category: category,
         location: location,
-        date: date,
-        volunteersRequired: volunteersRequired
+        hostDateTime: hostDateTime,
+        volunteersRequired: volunteersRequired,
+        adminApproval: adminApproval
       }).then(() => {
         // Data saved successfully
-        alert('Event Created! Please wait for till the admin approves the event to make it live.');
+        alert('Event Created! Please wait till the admin approves your event inorder to make it live.');
         window.location.href = 'events.html'; // Redirect to events page on successful Event Creation
       }).catch((err) => {
         // Error
