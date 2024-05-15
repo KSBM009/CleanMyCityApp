@@ -85,13 +85,13 @@
           <span id="phoneNumber-span"></span>
         </div>
 
-        <button id="submit-button" type="submit" class="btn btn-success">Submit</button>
-        <button id="goolge-button" type="submit" class="btn btn-primary">
+        <button id="submit-button" type="button" class="btn btn-success">Submit</button>
+        <!-- <button id="google-button" type="button" class="btn btn-primary">
           <span class="btn-icon">
             <i class="fa-brands fa-google"></i>
           </span>
           <span class="btn-text">Sign Up with Google</span>
-        </button>
+        </button> -->
         
         <p style="text-align: center">
           Already have an existing account? <a href="login.html">Log In</a>
@@ -136,7 +136,7 @@
     //   sendEmailVerification(auth.currentUser, actionCodeSettings).then(() => {
     //     document.getElementById('otp-input').style.display = 'block';
     //     document.getElementById('sendOTP').style.display = 'none';
-    //     document.getElementById('submit').style.display = 'none';
+    //     document.getElementById('submit-button').style.display = 'none';
     //   }).catch((error) => {
     //     console.error(error);
     //   });
@@ -145,7 +145,7 @@
     // // Email OTP Verification
     // document.getElementById('verifyOTP').addEventListener('click', (e) => {
     //   var otp = document.getElementById('otp').value;
-    //   var email = document.getElementById('email').value;
+    //   var email = document.getElementById('inputEmail').value;
 
     //   checkActionCode(auth, otp)
     //   .then((info) => {
