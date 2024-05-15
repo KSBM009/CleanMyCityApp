@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,17 +8,14 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href=".\userReg.css">
 
-
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/0c4e367752.js" crossorigin="anonymous"></script>
 
   <!-- GOOGLE FONTS -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
-
 <body>
   <!-- nav section -->
   <div class="container">
@@ -42,7 +38,6 @@
           <!-- <li class="nav-item">
               <a class="nav-link" href="">About Us </a>
           </li> -->
-
         </ul>
       </div>
     </nav>
@@ -80,7 +75,7 @@
         <div class="mb-3">
           <label for="phoneNumber" class="form-label">Address</label>
           <br>
-          <textarea name="" id="" cols="62" required></textarea>
+          <textarea name="" id="input-address" cols="62" required></textarea>
           <span id="addressSpan"></span>
         </div>
 
@@ -96,25 +91,21 @@
             <i class="fa-brands fa-google"></i>
           </span>
           <span class="btn-text">Sign Up with Google</span>
-
         </button>
+        
         <p style="text-align: center">
-          Already have an account <a href="login.html">Sign In</a>
+          Already have an existing account? <a href="login.html">Log In</a>
         </p>
 
       </form>
     </div>
   </div>
 
-  <p style="text-align: center">
-    Already have an existing account? <a href="login.html">Log In</a>
-  </p>
-
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getDatabase } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, applyActionCode, checkActionCode, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, applyActionCode, checkActionCode } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -135,58 +126,61 @@
     const db = getDatabase(app);
     const auth = getAuth(app);
 
-    // Send OTP
-    document.getElementById('sendOTP').addEventListener('click', () => {
-      var email = document.getElementById('email').value;
-      const actionCodeSettings = {
-        url: 'http://localhost:5500/userReg.html',
-        handleCodeInApp: true
-      };
-      sendEmailVerification(auth.currentUser, actionCodeSettings).then(() => {
-        document.getElementById('otp-input').style.display = 'block';
-        document.getElementById('sendOTP').style.display = 'none';
-        document.getElementById('submit').style.display = 'none';
-      }).catch((error) => {
-        console.error(error);
-      });
-    });
+    // // Send OTP
+    // document.getElementById('sendOTP').addEventListener('click', () => {
+    //   var email = document.getElementById('inputEmail').value;
+    //   const actionCodeSettings = {
+    //     url: 'http://localhost:5500/userReg.html',
+    //     handleCodeInApp: true
+    //   };
+    //   sendEmailVerification(auth.currentUser, actionCodeSettings).then(() => {
+    //     document.getElementById('otp-input').style.display = 'block';
+    //     document.getElementById('sendOTP').style.display = 'none';
+    //     document.getElementById('submit').style.display = 'none';
+    //   }).catch((error) => {
+    //     console.error(error);
+    //   });
+    // });
 
-    // Email OTP Verification
-    document.getElementById('verifyOTP').addEventListener('click', (e) => {
-      var otp = document.getElementById('otp').value;
-      var email = document.getElementById('email').value;
+    // // Email OTP Verification
+    // document.getElementById('verifyOTP').addEventListener('click', (e) => {
+    //   var otp = document.getElementById('otp').value;
+    //   var email = document.getElementById('email').value;
 
-      checkActionCode(auth, otp)
-      .then((info) => {
-        const newEmail = info.data().email;
-        if (newEmail === email) {
-          applyActionCode(auth, otp)
-          .then(() => {
-            // Email verification confirmed
-            alert('Email verified successfully!');
-            document.getElementById('otp-input').style.display = 'none';
-            document.getElementById('email-verified').style.display = 'inline';
-          })
-          .catch((error) => {
-            console.error('Error confirming email verification', error);
-            document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
-          });
-        } else {
-          document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
-        }
-      })
-      .catch((error) => {
-        console.error('Error checking action code', error);
-        document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
-      });
-    });
+    //   checkActionCode(auth, otp)
+    //   .then((info) => {
+    //     const newEmail = info.data().email;
+    //     if (newEmail === email) {
+    //       applyActionCode(auth, otp)
+    //       .then(() => {
+    //         // Email verification confirmed
+    //         alert('Email verified successfully!');
+    //         document.getElementById('otp-input').style.display = 'none';
+    //         document.getElementById('email-verified').style.display = 'inline';
+    //       })
+    //       .catch((error) => {
+    //         console.error('Error confirming email verification', error);
+    //         document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
+    //       });
+    //     } else {
+    //       document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error checking action code', error);
+    //     document.getElementById('otp-error-msg').textContent = 'Invalid OTP. Please try again.';
+    //   });
+    // });
 
-    document.getElementById('submit').addEventListener('click', () => {
-      var name = document.getElementById('name').value;
-      var email = document.getElementById('email').value;
-      var password = document.getElementById('password').value;
-      var phone = document.getElementById('phone').value;
-      var address = document.getElementById('address').value;
+    document.getElementById('submit-button').addEventListener('click', () => {
+      var name = document.getElementById('inputUser-name').value;
+      var email = document.getElementById('inputEmail').value;
+      var password = document.getElementById('inputPassword').value;
+      var phone = document.getElementById('input-phoneNumber').value;
+      var address = document.getElementById('input-address').value;
+
+      // Default value for isAdmin
+      var isAdmin = "No";
 
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -195,14 +189,27 @@
           console.log(user);
           alert('User Created!');
           window.location.href = 'login.html'; // Redirect to login page on successful Registration
-          // ...
+          
+          // // Save user information to the database
+          // const dbRef = ref(db, 'users/' + user.uid);
+          // set(dbRef, {
+          //   name: name,
+          //   email: email,
+          //   phone: phone,
+          //   address: address,
+          //   isAdmin: isAdmin // Add isAdmin field with default value
+          // }).then(() => {
+          //   console.log("User data saved successfully");
+          // }).catch((error) => {
+          //   console.error("Error saving user data: ", error);
+          //   alert("Error saving user data. Please try again later.");
+          // });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-
-          alert('Error: ' + errorMessage);
-          // ..
+          console.error("Error creating user: ", errorMessage);
+          alert("Error: " + errorMessage);
         });
     });
 
@@ -307,5 +314,4 @@
   }
   sBtn.addEventListener("click", validation);
 </script>
-
 </html>
