@@ -59,7 +59,7 @@
 
         <div class="mb-3">
           <label for="EventCategory" class="form-label">Event Category</label>
-          <select class="form-select" id="EventCategory" required>
+          <select class="form-select" id="Event-Category" required>
             <option value="">Select Event Category</option>
             <option value="Beach Cleanup">Beach Cleanup</option>
             <option value="Park Cleanup">Park Cleanup</option>
@@ -71,7 +71,7 @@
           </select>
           <span id="eventCategory-span" class="error-message"></span>
         </div>
-        
+
 
         <div class="mb-3">
           <label for="EventLocation" class="form-label">Event Location</label>
@@ -213,8 +213,8 @@
     }
 
     // EVENT CATEGORY VALIDATION
-    var eventCategory = document.getElementById('EventCategory').value;
-    var eventCategoryBox = document.getElementById('EventCategory');
+    var eventCategory = document.getElementById('Event-Category').value;
+    var eventCategoryBox = document.getElementById('Event-Category');
     var eventCategorySpan = document.getElementById('eventCategory-span');
 
     if (eventCategory.length === 0) {
