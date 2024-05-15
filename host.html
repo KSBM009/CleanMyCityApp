@@ -35,68 +35,57 @@
             <li class="nav-item">
               <a class="nav-link" href="events.html">Events</a>
             </li>
-            <!-- <li class="nav-item">
-                      <a class="nav-link" href="">About Us </a>
-                  </li> -->
           </ul>
         </div>
       </div>
-      <!-- FORM SECTION -->
+    </nav>
+    <!-- FORM SECTION -->
     <div class="full-form">
-      <form id="form">
+      <form id="eventForm" class="container">
         <h3>Event Registration</h3>
         <div class="mb-3">
-          <label for="eventTitle" class="form-label" id="eventTitle">Event Title</label>
-          <input type="text" class="form-control" id="input-eventTitle" required>
-          <span id="eventTitle-span"></span>
+          <label for="eventTitle" class="form-label">Event Title</label>
+          <input type="text" class="form-control" id="Event-Title" required>
+          <span id="eventTitle-span" class="error-message"></span>
         </div>
 
         <div class="mb-3">
-          <label for="EventDescription" class="form-label" id="Event-Description">Event Description</label><br>
-          <!-- <input type="text" class="form-control" id="input-eventDescription" required> -->
-          <textarea name="" class="form-control" id="input-eventDescription" required cols="62"></textarea>
-          <span id="eventDescription-span"></span>
+          <label for="EventDescription" class="form-label">Event Description</label>
+          <textarea class="form-control" id="Event-Description" required></textarea>
+          <span id="eventDescription-span" class="error-message"></span>
         </div>
 
         <div class="mb-3">
           <label for="EventCategory" class="form-label">Event Category</label>
-          <input type="text" class="form-control" id="input-eventCategory" required>
-          <span id="eventCategory-span"></span>
+          <input type="text" class="form-control" id="Event-Category" required>
+          <span id="eventCategory-span" class="error-message"></span>
         </div>
 
         <div class="mb-3">
           <label for="EventLocation" class="form-label">Event Location</label>
-          <input type="text" class="form-control" id="input-EventLocation" required>
-          <span id="EventLocation-span"></span>
+          <input type="text" class="form-control" id="Event-Location" required>
+          <span id="EventLocation-span" class="error-message"></span>
         </div>
 
         <div class="mb-3">
           <label for="eventDate" class="form-label">Event Date and Time</label>
-          <input type="datetime-local" class="form-control" id="input-eventDate" required>
-          <span id="eventDate-span"></span>
+          <input type="datetime-local" class="form-control" id="Event-Date" required>
+          <span id="EventDate-span" class="error-message"></span>
         </div>
 
         <div class="mb-3">
-          <label for="volunteerRequrired" class="form-label">Volunteers Requrired</label>
-          <input type="number" class="form-control" id="input-volunteerRequired" required min="5">
-          <span id="volunteerRequired-span"></span>
+          <label for="volunteerRequrired" class="form-label">Volunteers Required</label>
+          <input type="number" class="form-control" id="Volunteers-Required" required min="5">
+          <span id="VolunteersRequired-span" class="error-message"></span>
         </div>
 
         <button id="submit-button" type="submit" class="btn btn-success">Submit</button>
-        <!-- <button id="goolge-button" type="submit" class="btn btn-primary">
-          <span class="btn-icon">
-            <i class="fa-brands fa-google"></i>
-          </span>
-          <span class="btn-text">Sign Up with Google</span>
-        </button> -->
       </form>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
   <script type="module">
     // Import the functions you need from the SDKs you need
@@ -121,15 +110,15 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const eventForm = document.getElementById('eventForm');
 
-    eventForm.addEventListener('submit', (e) => {
+    document.getElementById('eventForm').addEventListener('submit', (e) => {
       e.preventDefault();
 
       var title = document.getElementById('Event-Title').value;
       var description = document.getElementById('Event-Description').value;
+      var category = document.getElementById('Event-Category').value;
       var location = document.getElementById('Event-Location').value;
-      var hostDateTime = document.getElementById('EventHost-DateTime').value;
+      var date = document.getElementById('Event-Date').value;
       var volunteersRequired = document.getElementById('Volunteers-Required').value;
 
       const eventRef = ref(db, 'events');
@@ -140,8 +129,9 @@
         eventId: eventId,
         title: title,
         description: description,
+        category: category,
         location: location,
-        hostDateTime: hostDateTime,
+        date: date,
         volunteersRequired: volunteersRequired
       }).then(() => {
         // Data saved successfully
@@ -167,15 +157,15 @@
   var currentDateTime = year + '-' + month + '-' + day + 'T' + hour + ':' + minute;
 
 
-  document.getElementById('input-eventDate').min = currentDateTime;
+  document.getElementById('Event-Date').min = currentDateTime;
 
   // VALIDATION
   var btn = document.getElementById('submit-button');
   function validation() {
 
     // EVENT TITLE VALIDATION
-    var eventTitle = document.getElementById('input-eventTitle').value;
-    var eventTitleBox = document.getElementById('input-eventTitle');
+    var eventTitle = document.getElementById('Event-Title').value;
+    var eventTitleBox = document.getElementById('Event-Title');
     var eventTitleSpan = document.getElementById('eventTitle-span');
 
     if (eventTitle.length === 0) {
@@ -188,8 +178,8 @@
     }
 
     // EVENT DESCRIPTION VALIDATION
-    var eventDescription = document.getElementById('input-eventDescription').value;
-    var eventDescriptionBox = document.getElementById('input-eventDescription');
+    var eventDescription = document.getElementById('Event-Description').value;
+    var eventDescriptionBox = document.getElementById('Event-Description');
     var eventDescriptionSpan = document.getElementById('eventDescription-span');
 
     if (eventDescription.length === 0) {
@@ -202,8 +192,8 @@
     }
 
     // EVENT CATEGORY VALIDATION
-    var eventCategory = document.getElementById('input-eventCategory').value;
-    var eventCategoryBox = document.getElementById('input-eventCategory');
+    var eventCategory = document.getElementById('Event-Category').value;
+    var eventCategoryBox = document.getElementById('Event-Category');
     var eventCategorySpan = document.getElementById('eventCategory-span');
 
     if (eventCategory.length === 0) {
@@ -216,8 +206,8 @@
     }
 
     // EVENT LOCATION VALIDATION
-    var eventLocation = document.getElementById('input-EventLocation').value;
-    var eventLocationBox = document.getElementById('input-EventLocation');
+    var eventLocation = document.getElementById('Event-Location').value;
+    var eventLocationBox = document.getElementById('Event-Location');
     var eventLocationSpan = document.getElementById('EventLocation-span');
 
     if (eventLocation.length === 0) {
@@ -230,9 +220,9 @@
     }
 
     // EVENT DATE VALIDATION
-    var eventDate = document.getElementById('input-eventDate').value;
-    var eventDateBox = document.getElementById('input-eventDate');
-    var eventDateSpan = document.getElementById('eventDate-span');
+    var eventDate = document.getElementById('Event-Date').value;
+    var eventDateBox = document.getElementById('Event-Date');
+    var eventDateSpan = document.getElementById('EventDate-span');
 
     if (eventDate < currentDateTime) {
       eventDateSpan.textContent = "This value is required";
@@ -243,9 +233,9 @@
       eventDateSpan.style.color = "";
     }
     // VOLUNTEER PARTICIPATION VALIDATION
-    var volunteerRequired = document.getElementById('input-volunteerRequired').value;
-    var volunteerRequiredBox = document.getElementById('input-volunteerRequired');
-    var volunteerRequiredSpan = document.getElementById('volunteerRequired-span');
+    var volunteerRequired = document.getElementById('Volunteers-Required').value;
+    var volunteerRequiredBox = document.getElementById('Volunteers-Required');
+    var volunteerRequiredSpan = document.getElementById('VolunteersRequired-span');
 
     if (volunteerRequired < 5) {
       volunteerRequiredSpan.textContent = "minimum 5 volunteers required";
