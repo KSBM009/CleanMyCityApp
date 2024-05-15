@@ -12,19 +12,9 @@
     max-width: 1536px;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
   body {
     background-image: url("images/background_img.jpg");
-    background-size: cover;
-    animation: fadeIn 1s ease;
+    background-size: auto;
   }
 
   h1 {
@@ -38,7 +28,6 @@
     bottom: 5px;
     left: 5px;
   }
-
   nav {
     max-width: 1536px;
     background-color: lightgrey;
@@ -48,33 +37,60 @@
     background-color: #dddddd;
   }
 
-  form {
-    width: 500px;
-    position: relative;
-    left: 480px;
-    border: solid;
-    border-color: green;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: lightgrey;
+  /* .btn {
+      background-color: green;
+      color: white;
+      border-radius: 10px;
+      padding: 5px;
+      padding-left: 15px;
+      padding-right: 15px;
+    } */
+
+  /* FILTER-SECTION */
+
+  .filter-div {
+    padding-top: 100px;
+    /* display: flex; */
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .filter-items {
+    padding-right: 10px;
+    color: black;
+  }
+  h4 {
+    color: black;
+  }
+
+  a {
+    color: black;
+  }
+
+  /* MAIN-SECTION */
+
+  #main-section {
     margin-top: 50px;
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
   }
 
-  #input-eventDescription {
-    height: 100px;
+  .card {
+    background-color: lightgray;
+    border-radius: 10px;
   }
 
-  .btn {
-    width: 250px;
-    position: relative;
-    left: 120px;
-    margin-top: 10px;
+  .event-form {
+    padding: 10px;
   }
 
-  .btn-text {
-    padding: 5px;
-  }
+  /* .event-form .form-control {
+      background-color: lightgrey;
+  } */
+
+  /* #evntDate {
+      background-color: lightgray;
+  } */
 }
 
 /* xl */
