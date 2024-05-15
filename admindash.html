@@ -4,7 +4,7 @@
   <link rel="icon" href=".\images\favicon.ico">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Admin Dashboard</title>
   <link rel="stylesheet" href="admindash.css" />
 
   <script src="https://kit.fontawesome.com/0c4e367752.js" crossorigin="anonymous"></script>
@@ -17,73 +17,75 @@
   <div class="container">
     <div class="container-nav">
       <h1>Clean My City <i class="fa-solid fa-leaf"></i></h1>
-      <div class="nav-items">
-        <button id="nav-profile">
-          <!-- <img class="nav-profile-img" src=".\images\profile-user.png" alt=""> -->
-        </button>
-      </div>
     </div>
 
     <div class="container-head">
-      <h1>Admins Dashboard</h1>
+      <h2>Admin Dashboard</h2>
     </div>
-    <div class="container">
-      <div class="events">
-        <div class="title-and-postDetail">
-          <div class="title-details">
-            <h4>Event Title:</h4>
-            <input
-              type="text"
-              id="event-title"
-              for="event-title"
-              name="event-title"
-            />
-          </div>
-          <div class="post-details">
-            <p>Posted by:</p>
-            <input
-              type="text"
-              id="post-name"
-              for="post-name"
-              name="post-name"
-            />
-          </div>
-        </div>
-        <button class="button">view and authorize</button>
-      </div>
 
-      <div class="events">
-        <div class="title-and-postDetail">
-          <div class="title-details">
-            <h4>Event Title:</h4>
-            <input type="text" id="event-title" />
-          </div>
-          <p>Posted by</p>
-        </div>
-        <button class="button">view and authorize</button>
-      </div>
-
-      <div class="events">
-        <div class="title-and-postDetail">
-          <div class="title-details">
-            <h4>Event Title:</h4>
-            <input type="text" id="event-title" />
-          </div>
-          <p>Posted by</p>
-        </div>
-        <button class="button">view and authorize</button>
-      </div>
-
-      <div class="events">
-        <div class="title-and-postDetail">
-          <div class="title-details">
-            <h4>Event Title:</h4>
-            <input type="text" id="event-title" />
-          </div>
-          <p>Posted by</p>
-        </div>
-        <button class="button">view and authorize</button>
-      </div>
+    <div class="container" id="eventsContainer">
+      <!-- Events will be dynamically added here -->
     </div>
-  </body>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-database.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyClhhuFS3moOoAsQZvMoasKi1icQ65M_rQ",
+      authDomain: "cleanmycityapp.firebaseapp.com",
+      projectId: "cleanmycityapp",
+      storageBucket: "cleanmycityapp.appspot.com",
+      messagingSenderId: "1002744065608",
+      appId: "1:1002744065608:web:f1cad15f0c4236a635327d",
+      measurementId: "G-W7FZYG79C8",
+      databaseURL: "https://cleanmycityapp-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Reference to events node
+    const eventsRef = db.ref("events");
+
+    // Fetch and display events
+    eventsRef.orderByChild("adminApproval").equalTo("no").once("value", snapshot => {
+      const eventsContainer = document.getElementById("eventsContainer");
+      snapshot.forEach(childSnapshot => {
+        const eventData = childSnapshot.val();
+        const eventCard = `
+          <div class="events">
+            <h4>Event Title: ${eventData.title}</h4>
+            <p>Event Description: ${eventData.description}</p>
+            <p>Event Category: ${eventData.category}</p>
+            <p>Event Location: ${eventData.location}</p>
+            <p>Event Date and Time: ${eventData.dateTime}</p>
+            <p>Volunteers Required: ${eventData.volunteersRequired}</p>
+            <button class="authorize" onclick="authorizeEvent('${childSnapshot.key}')">Authorize</button>
+            <button class="dismiss" onclick="dismissEvent('${childSnapshot.key}')">Dismiss Event</button>
+          </div>
+        `;
+        eventsContainer.innerHTML += eventCard;
+      });
+    });
+
+    // Function to authorize event
+    function authorizeEvent(eventId) {
+      eventsRef.child(eventId).update({ adminApproval: "yes" });
+      alert("Event Authorized!");
+      location.reload();
+    }
+
+    // Function to dismiss event
+    function dismissEvent(eventId) {
+      if (confirm("Are you sure you want to dismiss this event?")) {
+        eventsRef.child(eventId).remove();
+        alert("Event Dismissed!");
+        location.reload();
+      }
+    }
+  </script>
+</body>
 </html>
