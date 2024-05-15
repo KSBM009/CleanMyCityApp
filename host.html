@@ -59,9 +59,19 @@
 
         <div class="mb-3">
           <label for="EventCategory" class="form-label">Event Category</label>
-          <input type="text" class="form-control" id="Event-Category" required>
+          <select class="form-select" id="EventCategory" required>
+            <option value="">Select Event Category</option>
+            <option value="Beach Cleanup">Beach Cleanup</option>
+            <option value="Park Cleanup">Park Cleanup</option>
+            <option value="Street Cleanup">Street Cleanup</option>
+            <option value="River Cleanup">River Cleanup</option>
+            <option value="Neighborhood Cleanup">Neighborhood Cleanup</option>
+            <option value="Other">Other</option>
+            <!-- Add more options as needed -->
+          </select>
           <span id="eventCategory-span" class="error-message"></span>
         </div>
+        
 
         <div class="mb-3">
           <label for="EventLocation" class="form-label">Event Location</label>
