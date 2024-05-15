@@ -38,7 +38,7 @@
     background-color: #dddddd;
   }
 
-  form {
+  .full-form {
     width: 500px;
     position: relative;
     left: 480px;
