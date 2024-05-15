@@ -111,3 +111,7 @@
     width: 100%;
   }
 }
+
+#password-span {
+  color: red;
+}
