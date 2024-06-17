@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href=".\images\favicon.ico">
+    <link rel="icon" href="./images/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events</title>
@@ -52,6 +52,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -74,32 +75,41 @@
     const eventsRef = ref(db, 'events');
     get(eventsRef).then((snapshot) => {
         if (snapshot.exists()) {
-            let eventsHtml = '';
-            snapshot.forEach((childSnapshot) => {
+            let eventsHtml = '<div class="row">';
+            snapshot.forEach((childSnapshot, index) => {
                 const eventData = childSnapshot.val();
+                const progress = (eventData.volunteersReg / eventData.volunteersRequired) * 100;
                 eventsHtml += `
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="${eventData.imageUrl}" class="img-fluid rounded-start" alt="Event Image">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">${eventData.title}</h5>
-                                    <p class="card-text">${eventData.description}</p>
-                                    <ul class="list-unstyled">
-                                        <li><strong>Category:</strong> ${eventData.category}</li>
-                                        <li><strong>Date:</strong> ${eventData.date}</li>
-                                        <li><strong>Location:</strong> ${eventData.location}</li>
-                                        <li><strong>Progress:</strong> ${eventData.progress}%</li>
-                                    </ul>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <img src="${eventData.imageUrl}" class="card-img-top" alt="Event Image">
+                            <div class="card-body">
+                                <h5 class="card-title">${eventData.title}</h5>
+                                <p class="card-text">${eventData.description}</p>
+                                <ul class="list-unstyled">
+                                    <li><strong>Category:</strong> ${eventData.category}</li>
+                                    <li><strong>Date:</strong> ${eventData.date}</li>
+                                    <li><strong>Location:</strong> ${eventData.location}</li>
+                                    <li><strong>Volunteers:</strong> ${eventData.volunteers} / ${eventData.capacity}</li>
+                                    <li><strong>Progress:</strong></li>
+                                </ul>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress.toFixed(2)}%</div>
+                                </div>
                                     <button class="btn btn-success">View</button>
+                                    <button class="btn btn-success">View</button>
+                                </div>
+                                <button class="btn btn-success">View</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
+                if ((index + 1) % 3 === 0) {
+                    eventsHtml += '</div><div class="row">';
+                }
             });
+            eventsHtml += '</div>';
             eventsContainer.innerHTML = eventsHtml;
         } else {
             eventsContainer.innerHTML = "<p>No active events right now.</p>";
@@ -108,6 +118,14 @@
         console.error("Error fetching events:", error);
         eventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
     });
+
+    // Check authentication state
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      // User is not logged in, redirect to login page
+      window.location.href = 'login.html';
+    }
+  });
   </script>
 </body>
 </html>
