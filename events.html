@@ -69,6 +69,7 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+    const auth = getAuth(app);
 
     const eventsContainer = document.getElementById("eventsContainer");
 
@@ -78,30 +79,31 @@
             let eventsHtml = '<div class="row">';
             snapshot.forEach((childSnapshot, index) => {
                 const eventData = childSnapshot.val();
-                const progress = (eventData.volunteersReg / eventData.volunteersRequired) * 100;
-                eventsHtml += `
-                    <div class="col-md-4 mb-3">
-                        <div class="card h-100">
-                            <img src="${eventData.imageUrl}" class="card-img-top" alt="Event Image">
-                            <div class="card-body">
-                                <h5 class="card-title">${eventData.title}</h5>
-                                <p class="card-text">${eventData.description}</p>
-                                <ul class="list-unstyled">
-                                    <li><strong>Category:</strong> ${eventData.category}</li>
-                                    <li><strong>Date:</strong> ${eventData.date}</li>
-                                    <li><strong>Location:</strong> ${eventData.location}</li>
-                                    <li><strong>Progress:</strong></li>
-                                </ul>
-                                <div class="progress mb-2">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress.toFixed(2)}%</div>
-                                </div> 
-                                <button class="btn btn-success">View</button>
+                if (eventData.adminApproval === 'yes') {
+                    const progress = (eventData.volunteersReg / eventData.volunteersRequired) * 100;
+                    eventsHtml += `
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">${eventData.title}</h5>
+                                    <p class="card-text">${eventData.description}</p>
+                                    <ul class="list-unstyled">
+                                        <li><strong>Category:</strong> ${eventData.category}</li>
+                                        <li><strong>Date:</strong> ${eventData.date}</li>
+                                        <li><strong>Location:</strong> ${eventData.location}</li>
+                                        <li><strong>Progress:</strong></li>
+                                    </ul>
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress.toFixed(2)}%</div>
+                                    </div> 
+                                    <button class="btn btn-success">View</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-                if ((index + 1) % 3 === 0) {
-                    eventsHtml += '</div><div class="row">';
+                    `;
+                    if ((index + 1) % 3 === 0) {
+                        eventsHtml += '</div><div class="row">';
+                    }
                 }
             });
             eventsHtml += '</div>';
