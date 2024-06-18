@@ -63,11 +63,7 @@
 
   /* MAIN-SECTION */
 
-  #main-section {
-    margin-top: 50px;
-    display: flex;
-    justify-content: space-around;
-  }
+    */
 
   .card {
     background-color: lightgray;
@@ -79,21 +75,12 @@
   }
 
   /* .event-form .form-control {
-<<<<<<< HEAD
-      background-color: lightgrey;
-  } */
-
-  /* #evntDate {
-      background-color: lightgray;
-  } */
-=======
     background-color: lightgrey;
 } */
 
   /* #evntDate {
     background-color: lightgray;
 } */
->>>>>>> adminDashboard
 }
 
 /* xl */
