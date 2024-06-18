@@ -48,12 +48,8 @@
     };
 
     // Initialize Firebase
-    try {
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.database();
-    } catch (error) {
-      console.log("Firebase initialization error", error.stack);
-    }
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
     // Reference to events node
     const eventsRef = db.ref("events");
