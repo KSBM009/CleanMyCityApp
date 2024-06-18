@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="admindash.css" />
+
   <script src="https://kit.fontawesome.com/0c4e367752.js" crossorigin="anonymous"></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -16,17 +18,26 @@
     <div class="container-nav">
       <h1>Clean My City <i class="fa-solid fa-leaf"></i></h1>
     </div>
+
     <div class="container-head">
       <h2>Admin Dashboard</h2>
     </div>
-    <div id="eventsContainer"></div>
+
+    <div class="container" id="eventsContainer">
+      <!-- Events will be dynamically added here -->
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-database.js"></script>
-  <script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+    // Your web app's Firebase configuration
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
+      apiKey: "AIzaSyClhhuFS3moOoAsQZvMoasKi1icQ65M_rQ",
       authDomain: "cleanmycityapp.firebaseapp.com",
       projectId: "cleanmycityapp",
       storageBucket: "cleanmycityapp.appspot.com",
@@ -36,14 +47,22 @@
       databaseURL: "https://cleanmycityapp-default-rtdb.asia-southeast1.firebasedatabase.app"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    // Initialize Firebase
+    try {
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
+    } catch (error) {
+      console.log("Firebase initialization error", error.stack);
+    }
+
+    // Reference to events node
     const eventsRef = db.ref("events");
 
+    // Function to fetch and display events
     function fetchEvents() {
-      eventsRef.orderByChild("adminApproval").equalTo("no").once("value", snapshot => {
+      eventsRef.once("value", snapshot => {
         const eventsContainer = document.getElementById("eventsContainer");
-        eventsContainer.innerHTML = "";
+        eventsContainer.innerHTML = ""; // Clear the container before adding new events
         snapshot.forEach(childSnapshot => {
           const eventData = childSnapshot.val();
           const eventCard = `
@@ -54,8 +73,12 @@
               <p>Event Location: ${eventData.location}</p>
               <p>Event Date and Time: ${eventData.dateTime}</p>
               <p>Volunteers Required: ${eventData.volunteersRequired}</p>
+              ${eventData.adminApproval === "no" ? `
               <button class="authorize" onclick="authorizeEvent('${childSnapshot.key}')">Authorize</button>
               <button class="dismiss" onclick="dismissEvent('${childSnapshot.key}')">Dismiss Event</button>
+              ` : `
+              <p class="approved">Event Approved</p>
+              `}
             </div>
           `;
           eventsContainer.innerHTML += eventCard;
@@ -63,6 +86,7 @@
       });
     }
 
+    // Function to authorize event
     function authorizeEvent(eventId) {
       eventsRef.child(eventId).update({ adminApproval: "yes" })
         .then(() => {
@@ -72,6 +96,7 @@
         .catch(error => console.error("Error:", error));
     }
 
+    // Function to dismiss event
     function dismissEvent(eventId) {
       if (confirm("Are you sure you want to dismiss this event?")) {
         eventsRef.child(eventId).remove()
@@ -83,6 +108,7 @@
       }
     }
 
+    // Fetch events when the page loads
     fetchEvents();
   </script>
 </body>
