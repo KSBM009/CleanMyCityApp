@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <link rel="icon" href=".\images\favicon.ico">
   <meta charset="utf-8">
@@ -18,7 +17,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
-
 <body>
   <div class="container">
     <!-- nav section -->
@@ -103,11 +101,15 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js"></script>
 
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -128,43 +130,83 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    document.getElementById('eventForm').addEventListener('submit', (e) => {
-      e.preventDefault();
+    // Assuming Firebase and Firebase Authentication have already been initialized
+    const auth = getAuth(app);
+    
+    // Check if there is a currently signed-in user
+    if (auth.currentUser) {
+      // Get the signed-in user's unique ID
+      const hostUserId = auth.currentUser.uid;
+      console.log("Host User ID:", hostUserId);
+      // You can now use hostUserId for your database operations or any other purposes
+    } else {
+      // No user is signed in. Handle accordingly, maybe redirect to login page
+      alert('Please sign in to access this feature.');
+      window.location.href = 'login.html';
+    }
 
-      var title = document.getElementById('Event-Title').value;
-      var description = document.getElementById('Event-Description').value;
-      var category = document.getElementById('Event-Category').value;
-      var location = document.getElementById('Event-Location').value;
-      var hostDateTime = document.getElementById('Event-Date').value;
-      var volunteersRequired = document.getElementById('Volunteers-Required').value;
-
-      //Admin Approval is default no
-      var adminApproval = 'no';
-
-      const eventRef = ref(db, 'events');
-      const newEventRef = push(eventRef);
-      const eventId = newEventRef.key;
-
-      set(newEventRef, {
-        eventId: eventId,
-        title: title,
-        description: description,
-        category: category,
-        location: location,
-        hostDateTime: hostDateTime,
-        volunteersReg: 0,
-        volunteersRequired: volunteersRequired,
-        adminApproval: adminApproval
-      }).then(() => {
-        // Data saved successfully
-        alert('Event Created! Please wait till the admin approves your event inorder to make it live.');
-        window.location.href = 'events.html'; // Redirect to events page on successful Event Creation
-      }).catch((err) => {
-        // Error
-        alert('Error in creating the Event: ' + err);
-      });
+    // Check if user is signed in
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        alert('Please sign in to create an event.');
+        window.location.href = 'login.html'; // Redirect to login page
+      }
     });
-  </script>
+
+    document.getElementById('eventForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const user = auth.currentUser;
+      if (!user) {
+        alert('Please sign in to create an event.');
+        window.location.href = 'login.html';
+        return;
+      }
+      const userId = user.uid;
+
+      document.getElementById('eventForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        var title = document.getElementById('Event-Title').value;
+        var description = document.getElementById('Event-Description').value;
+        var category = document.getElementById('Event-Category').value;
+        var location = document.getElementById('Event-Location').value;
+        var hostDateTime = document.getElementById('Event-Date').value;
+        var volunteersRequired = document.getElementById('Volunteers-Required').value;
+
+        //Admin Approval is default no
+        var adminApproval = 'no';
+
+        const eventRef = ref(db, 'events');
+        const newEventRef = push(eventRef);
+        const eventId = newEventRef.key;
+
+        // For image upload
+        const imageFile = document.getElementById('image').files[0];
+        const imageRef = storageRef(storage, `event_images/${imageFile.name}`);
+        const snapshot = await uploadBytes(imageRef, imageFile);
+        const imageUrl = await getDownloadURL(snapshot.ref);
+
+        // Include imageUrl in the data being saved to the database
+        set(newEventRef, {
+          eventId: eventId,
+          userId: userId, // Include the host user ID
+          title: title,
+          description: description,
+          category: category,
+          location: location,
+          hostDateTime: hostDateTime,
+          volunteersReg: 0,
+          volunteersRequired: volunteersRequired,
+          adminApproval: adminApproval,
+          imageUrl: imageUrl // Include the image URL
+        }).then(() => {
+          alert('Event Created! Please wait till the admin approves your event inorder to make it live.');
+          window.location.href = 'events.html';
+        }).catch((err) => {
+          alert('Error in creating the Event: ' + err);
+        });
+      });
+</script>
 </body>
 <!-- JAVASCRIPT -->
 <script>
@@ -270,5 +312,4 @@
   }
   btn.addEventListener("click", validation);
 </script>
-
 </html>
