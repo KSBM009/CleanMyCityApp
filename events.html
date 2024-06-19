@@ -61,6 +61,11 @@
         <div id="closedEventsContainer" class="container"></div>
     </section>
 
+    <section id="completed-section">
+        <h2 id="completedEvents-title" class="text-center my-4">Completed Events</h2>
+        <div id="completedEventsContainer" class="container"></div>
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
@@ -88,11 +93,12 @@
 
         const eventsContainer = document.getElementById("eventsContainer");
         const closedEventsContainer = document.getElementById("closedEventsContainer");
+        const completedEventsContainer = document.getElementById("completedEventsContainer");
         const sortEvents = document.getElementById("sortEvents");
 
         const eventsRef = ref(db, 'events');
 
-        function renderEvents(events, container) {
+        function renderEvents(events, container, includeAttendButton) {
             let eventsHtml = '<div class="row">';
             events.forEach((eventData, index) => {
                 const progress = (eventData.volunteersReg / eventData.volunteersRequired) * 100;
@@ -112,7 +118,7 @@
                                 <div class="progress mb-2">
                                     <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress.toFixed(2)}%</div>
                                 </div>
-                                ${isEventClosed ? '<p class="text-danger">Event is Full!</p>' : `<button class="btn btn-success" onclick="attendEvent('${eventData.eventId}', ${eventData.volunteersReg}, ${eventData.volunteersRequired})">Attend</button>`}
+                                ${includeAttendButton && !isEventClosed ? `<button class="btn btn-success" onclick="attendEvent('${eventData.eventId}', ${eventData.volunteersReg}, ${eventData.volunteersRequired})">Attend</button>` : isEventClosed ? '<p class="text-danger">Event is Full!</p>' : ''}
                             </div>
                         </div>
                     </div>
@@ -130,13 +136,16 @@
                 if (snapshot.exists()) {
                     const liveEvents = [];
                     const closedEvents = [];
+                    const completedEvents = [];
                     const currentDate = new Date();
 
                     snapshot.forEach((childSnapshot) => {
                         const eventData = childSnapshot.val();
                         if (eventData.adminApproval === 'yes') {
                             const eventDate = new Date(eventData.hostDateTime);
-                            if (eventDate < currentDate) {
+                            if (eventData.volunteersReg >= eventData.volunteersRequired) {
+                                completedEvents.push(eventData);
+                            } else if (eventDate < currentDate) {
                                 closedEvents.push(eventData);
                             } else {
                                 liveEvents.push(eventData);
@@ -147,21 +156,22 @@
                     if (sortBy === 'progress') {
                         liveEvents.sort((a, b) => (a.volunteersReg / a.volunteersRequired) - (b.volunteersReg / b.volunteersRequired));
                         closedEvents.sort((a, b) => (a.volunteersReg / a.volunteersRequired) - (b.volunteersReg / b.volunteersRequired));
+                        completedEvents.sort((a, b) => (a.volunteersReg / a.volunteersRequired) - (b.volunteersReg / b.volunteersRequired));
                     } else {
                         liveEvents.sort((a, b) => new Date(a.hostDateTime) - new Date(b.hostDateTime));
                         closedEvents.sort((a, b) => new Date(a.hostDateTime) - new Date(b.hostDateTime));
+                        completedEvents.sort((a, b) => new Date(a.hostDateTime) - new Date(b.hostDateTime));
                     }
 
-                    renderEvents(liveEvents, eventsContainer);
-                    renderEvents(closedEvents, closedEventsContainer);
+                    renderEvents(liveEvents, eventsContainer, true);
+                    renderEvents(closedEvents, closedEventsContainer, false);
+                    renderEvents(completedEvents, completedEventsContainer, false);
                 } else {
                     eventsContainer.innerHTML = "<p>No active events right now.</p>";
-                    closedEventsContainer.innerHTML = "<p>No closed events right now.</p>";
                 }
             }).catch((error) => {
                 console.error("Error fetching events:", error);
                 eventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
-                closedEventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
             });
         }
 
