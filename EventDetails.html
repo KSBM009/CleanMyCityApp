@@ -1,106 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Event Details - CLEAN MY CITY</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      /* Your CSS Styles */
-      /* Reset default margin and padding */
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-      }
 
-      /* Apply styles to the background image or container */
-      .background-img {
-        background-color: lightgray;
-        padding: 20px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Details - CLEAN MY CITY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
+  <style>
+    /* Your CSS Styles */
+    /* Reset default margin and padding */
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+    }
 
-      /* Style the navigation bar */
-      .nav-bar {
-        background-color: #333;
-        color: #fff;
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+    /* Apply styles to the background image or container */
+    .background-img {
+      background-color: lightgray;
+      padding: 20px;
+    }
 
-      .title {
-        font-size: 24px;
-        margin: 0;
-      }
+    /* Style the navigation bar */
+    .nav-bar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      .nav-right a {
-        color: #fff;
-        text-decoration: none;
-        margin-left: 10px;
-      }
+    .title {
+      font-size: 24px;
+      margin: 0;
+    }
 
-      /* Style the container for event details */
-      .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
+    .nav-right a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 10px;
+    }
 
-      .container h2 {
-        color: #333;
-      }
+    /* Style the container for event details */
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-      .container p {
-        color: #666;
-        line-height: 1.5;
-      }
+    .container h2 {
+      color: #333;
+    }
 
-      /* Responsive image styling */
-      img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin-bottom: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="background-img">
-      <nav class="nav-bar">
-        <h1 class="title">CLEAN MY CITY</h1>
-        <div class="nav-right">
-          <a href="UpcomingEvents.html">Upcoming Events</a>
-          <a href="CompletedEvents.html">Completed Events</a>
-          <a href="user-profile.html">User Profile</a>
-        </div>
-      </nav>
-      <div class="container">
-        <h2>Event Details</h2>
-        <p id="eventDetails"></p>
+    .container p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* Responsive image styling */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-img">
+    <nav class="nav-bar">
+      <h1 class="title">CLEAN MY CITY</h1>
+      <div class="nav-right">
+        <a href="UpcomingEvents.html">Upcoming Events</a>
+        <a href="CompletedEvents.html">Completed Events</a>
+        <a href="user-profile.html">User Profile</a>
       </div>
+    </nav>
+    <div class="container">
+      <h2>Event Details</h2>
+      <p id="eventDetails"></p>
     </div>
+  </div>
 
-    <script>
-      // JavaScript Functionality to Display Event Details
+  <script>
+    // JavaScript Functionality to Display Event Details
 
-      // Parse query parameters to get event details
-      const urlParams = new URLSearchParams(window.location.search);
-      const location = urlParams.get("location");
-      const dateTime = urlParams.get("dateTime");
+    // Parse query parameters to get event details
+    const urlParams = new URLSearchParams(window.location.search);
+    const location = urlParams.get("location");
+    const dateTime = urlParams.get("dateTime");
 
-      // Display event details
-      const eventDetailsContainer = document.getElementById("eventDetails");
-      eventDetailsContainer.textContent = `Location: ${location}\nDate & Time: ${new Date(
-        dateTime
-      ).toLocaleString()}`;
-    </script>
-  </body>
+    // Display event details
+    const eventDetailsContainer = document.getElementById("eventDetails");
+    eventDetailsContainer.textContent = `Location: ${location}\nDate & Time: ${new Date(
+      dateTime
+    ).toLocaleString()}`;
+  </script>
+</body>
+
 </html>
