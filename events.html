@@ -56,9 +56,14 @@
         <div id="eventsContainer" class="container"></div>
     </section>
 
+    <section id="closed-section">
+        <h2 id="closedEvents-title" class="text-center my-4">Closed Events</h2>
+        <div id="closedEventsContainer" class="container"></div>
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
+    </script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
@@ -82,11 +87,12 @@
         const auth = getAuth(app);
 
         const eventsContainer = document.getElementById("eventsContainer");
+        const closedEventsContainer = document.getElementById("closedEventsContainer");
         const sortEvents = document.getElementById("sortEvents");
 
         const eventsRef = ref(db, 'events');
 
-        function renderEvents(events) {
+        function renderEvents(events, container) {
             let eventsHtml = '<div class="row">';
             events.forEach((eventData, index) => {
                 const progress = (eventData.volunteersReg / eventData.volunteersRequired) * 100;
@@ -116,31 +122,46 @@
                 }
             });
             eventsHtml += '</div>';
-            eventsContainer.innerHTML = eventsHtml;
+            container.innerHTML = eventsHtml;
         }
 
         function fetchAndRenderEvents(sortBy) {
             get(eventsRef).then((snapshot) => {
                 if (snapshot.exists()) {
-                    const events = [];
+                    const liveEvents = [];
+                    const closedEvents = [];
+                    const currentDate = new Date();
+
                     snapshot.forEach((childSnapshot) => {
                         const eventData = childSnapshot.val();
                         if (eventData.adminApproval === 'yes') {
-                            events.push(eventData);
+                            const eventDate = new Date(eventData.hostDateTime);
+                            if (eventDate < currentDate) {
+                                closedEvents.push(eventData);
+                            } else {
+                                liveEvents.push(eventData);
+                            }
                         }
                     });
+
                     if (sortBy === 'progress') {
-                        events.sort((a, b) => (a.volunteersReg / a.volunteersRequired) - (b.volunteersReg / b.volunteersRequired));
+                        liveEvents.sort((a, b) => (a.volunteersReg / a.volunteersRequired) - (b.volunteersReg / b.volunteersRequired));
+                        closedEvents.sort((a, b) => (a.volunteersReg / a.volunteersRequired) - (b.volunteersReg / b.volunteersRequired));
                     } else {
-                        events.sort((a, b) => new Date(a.hostDateTime) - new Date(b.hostDateTime));
+                        liveEvents.sort((a, b) => new Date(a.hostDateTime) - new Date(b.hostDateTime));
+                        closedEvents.sort((a, b) => new Date(a.hostDateTime) - new Date(b.hostDateTime));
                     }
-                    renderEvents(events);
+
+                    renderEvents(liveEvents, eventsContainer);
+                    renderEvents(closedEvents, closedEventsContainer);
                 } else {
                     eventsContainer.innerHTML = "<p>No active events right now.</p>";
+                    closedEventsContainer.innerHTML = "<p>No closed events right now.</p>";
                 }
             }).catch((error) => {
                 console.error("Error fetching events:", error);
                 eventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
+                closedEventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
             });
         }
 
