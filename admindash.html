@@ -61,12 +61,12 @@
           const eventData = childSnapshot.val();
           const eventCard = `
             <div class="events">
-              <h4>Event Title: ${eventData.title}</h4>
-              <p>Event Description: ${eventData.description}</p>
-              <p>Event Category: ${eventData.category}</p>
-              <p>Event Location: ${eventData.location}</p>
-              <p>Event Date and Time: ${eventData.hostDateTime}</p>
-              <p>Volunteers Required: ${eventData.volunteersRequired}</p>
+              <h4>${eventData.title}</h4> <br>
+              <p>${eventData.description}</p> <br>
+              <p>Event Category: ${eventData.category}</p> <br>
+              <p>Event Location: ${eventData.location}</p> <br>
+              <p>Event Date and Time: ${eventData.hostDateTime}</p> <br>
+              <p>Volunteers Required: ${eventData.volunteersRequired}</p> <br>
               ${eventData.adminApproval === "no" ? `
               <button class="authorize" onclick="authorizeEvent('${childSnapshot.key}')">Authorize</button>
               <button class="dismiss" onclick="dismissEvent('${childSnapshot.key}')">Dismiss Event</button>
