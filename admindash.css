@@ -54,27 +54,131 @@
 
   .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     gap: 40px;
     margin-top: 50px;
   }
 
   .events {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     background-color: white;
-
     margin: 20px 300px;
-    padding: 10px;
+    padding: 30px;
+    border-radius: 10px;
+    width: 600px;
   }
 
-  .btn {
-    background-color: green;
-    color: white;
-    border-radius: 10px;
-    padding: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+  /* BUTTONS */
+
+  /* Custom Authorize Button */
+  .authorize {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff; /* Text color */
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #28a745; /* Background color */
+    border: 1px solid #28a745; /* Border color */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin: 5px;
+  }
+
+  .authorize:hover {
+    color: #fff;
+    background-color: #218838; /* Background color on hover */
+    border-color: #1e7e34; /* Border color on hover */
+  }
+
+  .authorize:focus,
+  .authorize.focus {
+    color: #fff;
+    background-color: #218838; /* Background color on focus */
+    border-color: #1e7e34; /* Border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); /* Box shadow on focus */
+  }
+
+  .authorize:disabled,
+  .authorize.disabled {
+    color: #fff;
+    background-color: #28a745; /* Background color when disabled */
+    border-color: #28a745; /* Border color when disabled */
+  }
+
+  .authorize:not(:disabled):not(.disabled):active,
+  .authorize:not(:disabled):not(.disabled).active,
+  .show > .authorize.dropdown-toggle {
+    color: #fff;
+    background-color: #1e7e34; /* Background color when active */
+    border-color: #1c7430; /* Border color when active */
+  }
+
+  .authorize:not(:disabled):not(.disabled):active:focus,
+  .authorize:not(:disabled):not(.disabled).active:focus,
+  .show > .authorize.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); /* Box shadow on active focus */
+  }
+
+  /* Custom Dismiss Button */
+  .dismiss {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff; /* Text color */
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #dc3545; /* Background color */
+    border: 1px solid #dc3545; /* Border color */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin: 5px;
+  }
+
+  .dismiss:hover {
+    color: #fff;
+    background-color: #c82333; /* Background color on hover */
+    border-color: #bd2130; /* Border color on hover */
+  }
+
+  .dismiss:focus,
+  .dismiss.focus {
+    color: #fff;
+    background-color: #c82333; /* Background color on focus */
+    border-color: #bd2130; /* Border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); /* Box shadow on focus */
+  }
+
+  .dismiss:disabled,
+  .dismiss.disabled {
+    color: #fff;
+    background-color: #dc3545; /* Background color when disabled */
+    border-color: #dc3545; /* Border color when disabled */
+  }
+
+  .dismiss:not(:disabled):not(.disabled):active,
+  .dismiss:not(:disabled):not(.disabled).active,
+  .show > .dismiss.dropdown-toggle {
+    color: #fff;
+    background-color: #bd2130; /* Background color when active */
+    border-color: #b21f2d; /* Border color when active */
+  }
+
+  .dismiss:not(:disabled):not(.disabled):active:focus,
+  .dismiss:not(:disabled):not(.disabled).active:focus,
+  .show > .dismiss.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); /* Box shadow on active focus */
   }
 
   /* FILTER-SECTION */
