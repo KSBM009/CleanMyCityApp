@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="icon" href="./images/favicon.ico">
     <meta charset="UTF-8">
@@ -19,7 +18,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-custom-color">
@@ -40,7 +38,6 @@
                         <li class="nav-item">
                             <a class="nav-link"><button id="logout">logout</button></a>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -49,6 +46,13 @@
 
     <section id="main-section">
         <h2 id="liveEvents-title" class="text-center my-4">Live Events</h2>
+        <div class="container text-center mb-4">
+            <label for="sortEvents">Sort by:</label>
+            <select id="sortEvents" class="form-select d-inline-block w-auto">
+                <option value="date">Date</option>
+                <option value="progress">Participation Progress</option>
+            </select>
+        </div>
         <div id="eventsContainer" class="container"></div>
     </section>
 
@@ -78,49 +82,74 @@
         const auth = getAuth(app);
 
         const eventsContainer = document.getElementById("eventsContainer");
+        const sortEvents = document.getElementById("sortEvents");
 
         const eventsRef = ref(db, 'events');
-        get(eventsRef).then((snapshot) => {
-            if (snapshot.exists()) {
-                let eventsHtml = '<div class="row">';
-                snapshot.forEach((childSnapshot, index) => {
-                    const eventData = childSnapshot.val();
-                    if (eventData.adminApproval === 'yes') {
-                        const progress = (eventData.volunteersReg / eventData.volunteersRequired) * 100;
-                        const isEventClosed = eventData.volunteersReg >= eventData.volunteersRequired;
-                        eventsHtml += `
-                        <div class="col-md-4 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title">${eventData.title}</h5>
-                                    <p class="card-text">${eventData.description}</p>
-                                    <ul class="list-unstyled">
-                                        <li><strong>Category:</strong> ${eventData.category}</li>
-                                        <li><strong>Date:</strong> ${eventData.hostDateTime}</li>
-                                        <li><strong>Location:</strong> ${eventData.location}</li>
-                                        <li><strong>Participation Progress:</strong></li>
-                                    </ul>
-                                    <div class="progress mb-2">
-                                        <div class="progress-bar bg-success text-black" role="progressbar" style="width: ${progress}%; color: black;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress.toFixed(2)}%</div>
-                                    </div>
-                                    ${isEventClosed ? '<p class="text-danger">Event is Full!</p>' : `<button class="btn btn-success" onclick="attendEvent('${childSnapshot.key}', ${eventData.volunteersReg}, ${eventData.volunteersRequired})">Attend</button>`}
+
+        function renderEvents(events) {
+            let eventsHtml = '<div class="row">';
+            events.forEach((eventData, index) => {
+                const progress = (eventData.volunteersReg / eventData.volunteersRequired) * 100;
+                const isEventClosed = eventData.volunteersReg >= eventData.volunteersRequired;
+                eventsHtml += `
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">${eventData.title}</h5>
+                                <p class="card-text">${eventData.description}</p>
+                                <ul class="list-unstyled">
+                                    <li><strong>Category:</strong> ${eventData.category}</li>
+                                    <li><strong>Date:</strong> ${eventData.hostDateTime}</li>
+                                    <li><strong>Location:</strong> ${eventData.location}</li>
+                                    <li><strong>Participation Progress:</strong></li>
+                                </ul>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress.toFixed(2)}%</div>
                                 </div>
+                                ${isEventClosed ? '<p class="text-danger">Event is Full!</p>' : `<button class="btn btn-success" onclick="attendEvent('${eventData.eventId}', ${eventData.volunteersReg}, ${eventData.volunteersRequired})">Attend</button>`}
                             </div>
                         </div>
-                    `;
-                        if ((index + 1) % 3 === 0) {
-                            eventsHtml += '</div><div class="row">';
+                    </div>
+                `;
+                if ((index + 1) % 3 === 0) {
+                    eventsHtml += '</div><div class="row">';
+                }
+            });
+            eventsHtml += '</div>';
+            eventsContainer.innerHTML = eventsHtml;
+        }
+
+        function fetchAndRenderEvents(sortBy) {
+            get(eventsRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const events = [];
+                    snapshot.forEach((childSnapshot) => {
+                        const eventData = childSnapshot.val();
+                        if (eventData.adminApproval === 'yes') {
+                            events.push(eventData);
                         }
+                    });
+                    if (sortBy === 'progress') {
+                        events.sort((a, b) => (a.volunteersReg / a.volunteersRequired) - (b.volunteersReg / b.volunteersRequired));
+                    } else {
+                        events.sort((a, b) => new Date(a.hostDateTime) - new Date(b.hostDateTime));
                     }
-                });
-                eventsHtml += '</div>';
-                eventsContainer.innerHTML = eventsHtml;
-            } else {
-                eventsContainer.innerHTML = "<p>No active events right now.</p>";
-            }
-        }).catch((error) => {
-            console.error("Error fetching events:", error);
-            eventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
+                    renderEvents(events);
+                } else {
+                    eventsContainer.innerHTML = "<p>No active events right now.</p>";
+                }
+            }).catch((error) => {
+                console.error("Error fetching events:", error);
+                eventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
+            });
+        }
+
+        // Initial fetch and render sorted by date
+        fetchAndRenderEvents('date');
+
+        // Handle sort change
+        sortEvents.addEventListener('change', (event) => {
+            fetchAndRenderEvents(event.target.value);
         });
 
         // Function to handle Attend button click
@@ -131,7 +160,7 @@
                 update(eventRef, { volunteersReg: newVolunteersReg })
                     .then(() => {
                         alert("Thank you for joining the event!");
-                        location.reload(); // Reload the page to update the progress bar
+                        fetchAndRenderEvents(sortEvents.value); // Fetch and render events again after attendance
                     })
                     .catch((error) => console.error("Error updating event:", error));
             } else {
@@ -148,5 +177,4 @@
         });
     </script>
 </body>
-
 </html>
