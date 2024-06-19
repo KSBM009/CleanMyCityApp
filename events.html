@@ -143,7 +143,7 @@
                         const eventData = childSnapshot.val();
                         if (eventData.adminApproval === 'yes') {
                             const eventDate = new Date(eventData.hostDateTime);
-                            if (eventData.volunteersReg >= eventData.volunteersRequired) {
+                            if (eventData.volunteersReg >= eventData.volunteersRequired && eventDate < currentDate) {
                                 completedEvents.push(eventData);
                             } else if (eventDate < currentDate) {
                                 closedEvents.push(eventData);
@@ -168,10 +168,14 @@
                     renderEvents(completedEvents, completedEventsContainer, false);
                 } else {
                     eventsContainer.innerHTML = "<p>No active events right now.</p>";
+                    closedEventsContainer.innerHTML = "<p>No closed events right now.</p>";
+                    completedEventsContainer.innerHTML = "<p>No completed events right now.</p>";
                 }
             }).catch((error) => {
                 console.error("Error fetching events:", error);
                 eventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
+                closedEventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
+                completedEventsContainer.innerHTML = "<p>Error fetching events. Please try again later.</p>";
             });
         }
 
