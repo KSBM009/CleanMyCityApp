@@ -35,7 +35,6 @@
             <li class="nav-item">
               <a class="nav-link"><button id="logout">logout</button></a>
             </li>
-
           </ul>
         </div>
       </div>
@@ -110,8 +109,17 @@
           events.sort((a, b) => a.data.volunteersRequired - b.data.volunteersRequired);
         }
 
+        const currentTime = new Date();
+
         events.forEach(event => {
           const eventData = event.data;
+          const eventTime = new Date(eventData.hostDateTime);
+
+          if (eventData.adminApproval === "no" && eventTime < currentTime) {
+            dismissEvent(event.id, false); // Automatically dismiss past events without confirmation
+            return;
+          }
+
           const eventCard = `
             <div class="row mb-3">
               <div class="col">
@@ -127,7 +135,7 @@
                     </ul>
                     ${eventData.adminApproval === "no" ? `
                     <button class="btn btn-success" onclick="authorizeEvent('${event.id}')">Authorize</button>
-                    <button class="btn btn-danger" onclick="dismissEvent('${event.id}')">Dismiss Event</button>
+                    <button class="btn btn-danger" onclick="dismissEvent('${event.id}', true)">Dismiss Event</button>
                     ` : `
                     <p class="text-success">Event Approved</p>
                     `}
@@ -157,12 +165,14 @@
     }
 
     // Function to dismiss event
-    window.dismissEvent = function (eventId) {
+    window.dismissEvent = function (eventId, showAlert = true) {
       const eventRef = ref(db, `events/${eventId}`);
-      if (confirm("Are you sure you want to dismiss this event?")) {
+      if (!showAlert || confirm("Are you sure you want to dismiss this event?")) {
         remove(eventRef)
           .then(() => {
-            alert("Event Dismissed!");
+            if (showAlert) {
+              alert("Event Dismissed!");
+            }
             fetchEvents(document.getElementById("sortEvents").value);
           })
           .catch(error => console.error("Error:", error));
