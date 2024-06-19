@@ -227,12 +227,34 @@
   .container {
     max-width: 1024px;
   }
+
+  .events {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    margin: 20px 300px;
+    padding: 30px;
+    border-radius: 10px;
+    width: 600px;
+  }
 }
 
 /* lg */
 @media (max-width: 1024px) {
   .container {
     max-width: 768px;
+  }
+
+  .events {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    margin: 20px 300px;
+    padding: 30px;
+    border-radius: 10px;
+    width: 500px;
   }
 }
 
@@ -241,12 +263,32 @@
   .container {
     max-width: 640px;
   }
+  .events {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    margin: 20px 300px;
+    padding: 30px;
+    border-radius: 10px;
+    width: 450px;
+  }
 }
 
 /* sm */
 @media (max-width: 640px) {
   .container {
     max-width: 475px;
+  }
+  .events {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    margin: 20px 300px;
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
   }
 }
 
