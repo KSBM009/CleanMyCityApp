@@ -31,6 +31,21 @@
     margin-top: 10px;
   }
 
+  #logout {
+    background-color: red;
+    color: white;
+    border: none;
+    /* padding-top: 3px;
+    padding-bottom: 3px; */
+    width: 70px;
+    height: 28px;
+    border-radius: 4px;
+  }
+
+  #logout:hover {
+    background-color: lightslategrey;
+  }
+
   .btn {
     background-color: green;
     color: white;
@@ -63,9 +78,7 @@
 
   /* MAIN-SECTION */
 
-    */
-
-  .card {
+  */ .card {
     background-color: lightgray;
     border-radius: 10px;
   }
