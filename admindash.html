@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <link rel="icon" href="./images/favicon.ico">
   <meta charset="UTF-8" />
@@ -16,9 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
-
 <body>
-
   <div class="full-container">
     <nav class="navbar navbar-expand-lg bg-custom-color">
       <div class="container-fluid">
@@ -45,14 +42,28 @@
     </nav>
   </div>
 
-
-
   <div class="container-head">
     <h2>Admin Dashboard</h2>
   </div>
+
+  <div class="container text-center mb-4">
+    <label for="sortEvents">Sort by:</label>
+    <select id="sortEvents" class="form-select d-inline-block w-auto">
+      <option value="date">Date</option>
+      <option value="title">Title</option>
+    </select>
+  </div>
+
   <div class="container">
-    <div id="eventsContainer">
-      <!-- Events will be dynamically added here -->
+    <div id="newEventsContainer" class="mb-4">
+      <h3>New Events</h3>
+      <!-- New Events will be dynamically added here -->
+      <div id="newEventsRow"></div>
+    </div>
+    <div id="approvedEventsContainer">
+      <h3>Approved Events</h3>
+      <!-- Approved Events will be dynamically added here -->
+      <div id="approvedEventsRow"></div>
     </div>
   </div>
 
@@ -60,7 +71,7 @@
   <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-database.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+  </script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getDatabase, ref, get, update, remove } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
@@ -83,31 +94,55 @@
     const eventsRef = ref(db, 'events');
 
     // Function to fetch and display events
-    function fetchEvents() {
+    function fetchEvents(sortBy = 'date') {
       get(eventsRef).then(snapshot => {
-        const eventsContainer = document.getElementById("eventsContainer");
-        eventsContainer.innerHTML = ""; // Clear the container before adding new events
+        const newEventsRow = document.getElementById("newEventsRow");
+        const approvedEventsRow = document.getElementById("approvedEventsRow");
+        newEventsRow.innerHTML = ""; // Clear the row before adding new events
+        approvedEventsRow.innerHTML = ""; // Clear the row before adding approved events
+
+        const events = [];
         snapshot.forEach(childSnapshot => {
-          const eventData = childSnapshot.val();
+          events.push({ id: childSnapshot.key, data: childSnapshot.val() });
+        });
+
+        if (sortBy === 'date') {
+          events.sort((a, b) => new Date(a.data.hostDateTime) - new Date(b.data.hostDateTime));
+        } else if (sortBy === 'title') {
+          events.sort((a, b) => a.data.title.localeCompare(b.data.title));
+        }
+
+        events.forEach(event => {
+          const eventData = event.data;
           const eventCard = `
-            <div class="events">
-              <h4>${eventData.title}</h4> <br>
-              <p>${eventData.description}</p> <br>
-              <ul>
-                <li><strong>Category:</strong> ${eventData.category}</li>
-                <li><strong>Date:</strong> ${eventData.hostDateTime}</li>
-                <li><strong>Location:</strong> ${eventData.location}</li>
-                <li><strong>Volunteers Required:</strong> ${eventData.volunteersRequired}</li> <br>
-              </ul>
-              ${eventData.adminApproval === "no" ? `
-              <button class="authorize" onclick="authorizeEvent('${childSnapshot.key}')">Authorize</button>
-              <button class="dismiss" onclick="dismissEvent('${childSnapshot.key}')">Dismiss Event</button>
-              ` : `
-              <p class="approved">Event Approved</p>
-              `}
+            <div class="row mb-3">
+              <div class="col">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">${eventData.title}</h5>
+                    <p class="card-text">${eventData.description}</p>
+                    <ul class="list-unstyled">
+                      <li><strong>Category:</strong> ${eventData.category}</li>
+                      <li><strong>Date:</strong> ${eventData.hostDateTime}</li>
+                      <li><strong>Location:</strong> ${eventData.location}</li>
+                      <li><strong>Volunteers Required:</strong> ${eventData.volunteersRequired}</li>
+                    </ul>
+                    ${eventData.adminApproval === "no" ? `
+                    <button class="btn btn-success" onclick="authorizeEvent('${event.id}')">Authorize</button>
+                    <button class="btn btn-danger" onclick="dismissEvent('${event.id}')">Dismiss Event</button>
+                    ` : `
+                    <p class="text-success">Event Approved</p>
+                    `}
+                  </div>
+                </div>
+              </div>
             </div>
           `;
-          eventsContainer.innerHTML += eventCard;
+          if (eventData.adminApproval === "no") {
+            newEventsRow.innerHTML += eventCard;
+          } else {
+            approvedEventsRow.innerHTML += eventCard;
+          }
         });
       });
     }
@@ -118,7 +153,7 @@
       update(eventRef, { adminApproval: "yes" })
         .then(() => {
           alert("Event Authorized!");
-          fetchEvents();
+          fetchEvents(document.getElementById("sortEvents").value);
         })
         .catch(error => console.error("Error:", error));
     }
@@ -130,7 +165,7 @@
         remove(eventRef)
           .then(() => {
             alert("Event Dismissed!");
-            fetchEvents();
+            fetchEvents(document.getElementById("sortEvents").value);
           })
           .catch(error => console.error("Error:", error));
       }
@@ -138,7 +173,11 @@
 
     // Fetch events when the page loads
     fetchEvents();
+
+    // Handle sort change
+    document.getElementById("sortEvents").addEventListener('change', (event) => {
+      fetchEvents(event.target.value);
+    });
   </script>
 </body>
-
 </html>
