@@ -32,8 +32,7 @@
   <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-database.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getDatabase, ref, get, update, remove } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -63,10 +62,12 @@
             <div class="events">
               <h4>${eventData.title}</h4> <br>
               <p>${eventData.description}</p> <br>
-              <p>Event Category: ${eventData.category}</p> <br>
-              <p>Event Location: ${eventData.location}</p> <br>
-              <p>Event Date and Time: ${eventData.hostDateTime}</p> <br>
-              <p>Volunteers Required: ${eventData.volunteersRequired}</p> <br>
+              <ul>
+                <li><strong>Category:</strong> ${eventData.category}</li>
+                <li><strong>Date:</strong> ${eventData.hostDateTime}</li>
+                <li><strong>Location:</strong> ${eventData.location}</li>
+                <li><strong>Volunteers Required:</strong> ${eventData.volunteersRequired}</li> <br>
+              </ul>
               ${eventData.adminApproval === "no" ? `
               <button class="authorize" onclick="authorizeEvent('${childSnapshot.key}')">Authorize</button>
               <button class="dismiss" onclick="dismissEvent('${childSnapshot.key}')">Dismiss Event</button>
@@ -81,7 +82,7 @@
     }
 
     // Function to authorize event
-    function authorizeEvent(eventId) {
+    window.authorizeEvent = function(eventId) {
       const eventRef = ref(db, `events/${eventId}`);
       update(eventRef, { adminApproval: "yes" })
         .then(() => {
@@ -92,10 +93,10 @@
     }
 
     // Function to dismiss event
-    function dismissEvent(eventId) {
+    window.dismissEvent = function(eventId) {
       const eventRef = ref(db, `events/${eventId}`);
       if (confirm("Are you sure you want to dismiss this event?")) {
-        eventRef.remove()
+        remove(eventRef)
           .then(() => {
             alert("Event Dismissed!");
             fetchEvents();
