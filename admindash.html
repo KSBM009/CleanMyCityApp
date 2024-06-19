@@ -46,18 +46,21 @@
   </div>
 
 
-  <div class="container">
-    <div class="container-head">
-      <h2>Admin Dashboard</h2>
-    </div>
 
-    <div class="container" id="eventsContainer">
+  <div class="container-head">
+    <h2>Admin Dashboard</h2>
+  </div>
+  <div class="container">
+    <div id="eventsContainer">
       <!-- Events will be dynamically added here -->
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-database.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getDatabase, ref, get, update, remove } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
@@ -110,7 +113,7 @@
     }
 
     // Function to authorize event
-    window.authorizeEvent = function(eventId) {
+    window.authorizeEvent = function (eventId) {
       const eventRef = ref(db, `events/${eventId}`);
       update(eventRef, { adminApproval: "yes" })
         .then(() => {
@@ -121,7 +124,7 @@
     }
 
     // Function to dismiss event
-    window.dismissEvent = function(eventId) {
+    window.dismissEvent = function (eventId) {
       const eventRef = ref(db, `events/${eventId}`);
       if (confirm("Are you sure you want to dismiss this event?")) {
         remove(eventRef)
