@@ -95,7 +95,7 @@
                                         <li><strong>Participation Progress:</strong></li>
                                     </ul>
                                     <div class="progress mb-2">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: ${progress}%;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress.toFixed(2)}%</div>
+                                        <div class="progress-bar bg-success text-black" role="progressbar" style="width: ${progress}%; color: black;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress.toFixed(2)}%</div>
                                     </div>
                                     ${isEventClosed ? '<p class="text-danger">Event is Full!</p>' : `<button class="btn btn-success" onclick="attendEvent('${childSnapshot.key}', ${eventData.volunteersReg}, ${eventData.volunteersRequired})">Attend</button>`}
                                 </div>
