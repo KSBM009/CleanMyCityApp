@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="icon" href="./images/favicon.ico">
   <meta charset="UTF-8" />
@@ -15,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="full-container">
     <nav class="navbar navbar-expand-lg bg-custom-color">
@@ -53,22 +55,22 @@
     </select>
   </div>
 
-  <div id="newEventsContainer" class="mb-4">
+  <div class="all-events" id="newEventsContainer" class="mb-4">
     <h3>New Events</h3>
     <!-- New Events will be dynamically added here -->
     <div id="newEventsRow"></div>
   </div>
-  <div id="approvedEventsContainer">
+  <div class="all-events" id="approvedEventsContainer">
     <h3>Approved Events</h3>
     <!-- Approved Events will be dynamically added here -->
-    <div id="approvedEventsRow"></div>
+    <div class="all-events" id="approvedEventsRow"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/firebase@10.11.0/firebase-database.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-  </script>
+    </script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getDatabase, ref, get, update, remove } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
@@ -188,4 +190,5 @@
     });
   </script>
 </body>
+
 </html>

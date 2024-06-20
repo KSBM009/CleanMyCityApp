@@ -9,7 +9,7 @@
 /* 2xl */
 @media (max-width: 1536px) {
   .full-container {
-    max-width: 1280px;
+    max-width: 1536px;
   }
 
   body {
@@ -29,6 +29,11 @@
   }
   nav {
     margin-top: 10px;
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    padding: 40px;
+    background-color: #dddddd;
+    border-radius: 10px;
   }
 
   #logout {
@@ -58,6 +63,14 @@
     justify-content: center;
     gap: 40px;
     margin-top: 50px;
+  }
+
+  #newEventsContainer{
+    margin: 50px;
+  }
+
+  #approvedEventsContainer{
+    margin: 50px;
   }
 
   .events {

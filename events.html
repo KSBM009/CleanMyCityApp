@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="icon" href="./images/favicon.ico">
     <meta charset="UTF-8">
@@ -18,6 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-custom-color">
@@ -42,33 +44,34 @@
                 </div>
             </div>
         </nav>
+
+
+        <section id="main-section">
+            <h2 id="liveEvents-title" class="text-center my-4">Live Events</h2>
+            <div class="container text-center mb-4">
+                <label for="sortEvents">Sort by:</label>
+                <select id="sortEvents" class="form-select d-inline-block w-auto">
+                    <option value="date">Date</option>
+                    <option value="progress">Participation Progress</option>
+                </select>
+            </div>
+            <div id="eventsContainer" class="container"></div>
+        </section>
+
+        <section id="closed-section">
+            <h2 id="closedEvents-title" class="text-center my-4">Closed Events</h2>
+            <div id="closedEventsContainer" class="container"></div>
+        </section>
+
+        <section id="completed-section">
+            <h2 id="completedEvents-title" class="text-center my-4">Completed Events</h2>
+            <div id="completedEventsContainer" class="container"></div>
+        </section>
     </div>
-
-    <section id="main-section">
-        <h2 id="liveEvents-title" class="text-center my-4">Live Events</h2>
-        <div class="container text-center mb-4">
-            <label for="sortEvents">Sort by:</label>
-            <select id="sortEvents" class="form-select d-inline-block w-auto">
-                <option value="date">Date</option>
-                <option value="progress">Participation Progress</option>
-            </select>
-        </div>
-        <div id="eventsContainer" class="container"></div>
-    </section>
-
-    <section id="closed-section">
-        <h2 id="closedEvents-title" class="text-center my-4">Closed Events</h2>
-        <div id="closedEventsContainer" class="container"></div>
-    </section>
-
-    <section id="completed-section">
-        <h2 id="completedEvents-title" class="text-center my-4">Completed Events</h2>
-        <div id="completedEventsContainer" class="container"></div>
-    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        </script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
@@ -212,4 +215,5 @@
         });
     </script>
 </body>
+
 </html>

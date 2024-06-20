@@ -3,10 +3,23 @@
 
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" href="./images/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Event Details - CLEAN MY CITY</title>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet" />
-  <style>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="event.css">
+
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/0c4e367752.js" crossorigin="anonymous"></script>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <!-- <style>
     /* Your CSS Styles */
     /* Reset default margin and padding */
     body,
@@ -68,39 +81,73 @@
       display: block;
       margin-bottom: 20px;
     }
-  </style>
+  </style> -->
 </head>
 
 <body>
-  <div class="background-img">
-    <nav class="nav-bar">
-      <h1 class="title">CLEAN MY CITY</h1>
-      <div class="nav-right">
-        <a href="UpcomingEvents.html">Upcoming Events</a>
-        <a href="CompletedEvents.html">Completed Events</a>
-        <a href="user-profile.html">User Profile</a>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg bg-custom-color">
+      <div class="container-fluid">
+        <h1>Clean My City <i class="fa-solid fa-leaf"></i></h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="./home.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="host.html">Host</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"><button id="logout">logout</button></a>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
-    <div class="container">
-      <h2>Event Details</h2>
-      <p id="eventDetails"></p>
+
+
+    <div class="container-head">
+      <h2>Event Title</h2>
     </div>
-  </div>
 
-  <script>
-    // JavaScript Functionality to Display Event Details
+    <div class="card">
 
-    // Parse query parameters to get event details
-    const urlParams = new URLSearchParams(window.location.search);
-    const location = urlParams.get("location");
-    const dateTime = urlParams.get("dateTime");
+      <div class="card-body">
+        <h6 id="event-description" class="card-details">Event description:</h6>
+        <h6 id="event-category" class="card-details">Event Category:</h6>
+        <h6 id="event-date" class="card-details">Event date:</h6>
+        <h6 id="event-location" class="card-details">Event location:</h6>
+        <h6 id="participation-progress" class="card-details">Participation progress:</h6>
+        <p class="card-details">Do you wish to attend the Event?</p>
+        <button id="approve-btn" type="button" class="btn btn-success">Yes</button>
+        <button id="dismiss-btn" type="button" class="btn btn-danger">No</button>
+      </div>
+    </div>
 
-    // Display event details
-    const eventDetailsContainer = document.getElementById("eventDetails");
-    eventDetailsContainer.textContent = `Location: ${location}\nDate & Time: ${new Date(
-      dateTime
-    ).toLocaleString()}`;
-  </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+      </script>
+
+    <script>
+      // JavaScript Functionality to Display Event Details
+
+      // Parse query parameters to get event details
+      const urlParams = new URLSearchParams(window.location.search);
+      const location = urlParams.get("location");
+      const dateTime = urlParams.get("dateTime");
+
+      // Display event details
+      const eventDetailsContainer = document.getElementById("eventDetails");
+      eventDetailsContainer.textContent = `Location: ${location}\nDate & Time: ${new Date(
+        dateTime
+      ).toLocaleString()}`;
+    </script>
 </body>
 
 </html>
